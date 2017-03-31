@@ -147,7 +147,7 @@ This policy is nearly identical to our Authorization Policy, with the exception 
 {
 	"groupId": "io.apiman.plugins",
 	"artifactId": "apiman-plugins-soap-authorization-policy",
-	"version": "1.2.9.Final" // Please check for the latest version, this is just an example.
+	"version": "{{ book.apiman.version.release }}"
 }
 ```
 
@@ -347,7 +347,7 @@ For further references, see http://www.w3.org/TR/2014/REC-cors-20140116/[CORS W3
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-cors-policy",
-    "version": "1.2.9.Final" // Please check for the latest version, this is just an example.
+    "version": "{{ book.apiman.version.release }}"
 }
 ```
 
@@ -365,43 +365,44 @@ The configuration options available, are:
 | errorOnCorsFailure
 | Boolean
 a| .Error on CORS failure
-When true, any request that fails CORS validation will be terminated with an appropriate error. When false, the request will still be sent to the backend API, but the browser will be left to enforce the CORS failure. In both cases valid CORS headers will be set
+When true, any request that fails CORS validation will be terminated with an appropriate error. When false, the request will still be sent to the backend API, but the browser will be left to enforce the CORS failure. In both cases valid CORS headers will be set.
 | true
 
 | allowOrigin
 | Set<String>
-| .Access-Control-Allow-Origin
-List of origins permitted to make CORS requests through the gateway. By default same-origin is permitted, and cross-origin is forbidden. An entry of * permits all CORS requests
+a| .Access-Control-Allow-Origin
+List of origins permitted to make CORS requests through the gateway. By default same-origin is permitted, and cross-origin is forbidden.
+A special entry of `*` permits all CORS requests.
 | Empty
 
 | allowCredentials
 | Boolean
 a| .Access-Control-Allow-Credentials
-Whether response may be exposed when the `credentials` flag is set to true   on the request
+Whether response may be exposed when the `credentials` flag is set to true on the request.
 | false
 
 | exposeHeaders
 | Set<String>
 a| .Access-Control-Expose-Headers
-Which non-simple headers the browser may expose during CORS
+Which non-simple headers the browser may expose during CORS.
 | Empty
 
 | allowHeaders
 | Set<String>
 a| .Access-Control-Allow-Headers
-In response to preflight request, which _headers_ can be used during actual request
+In response to preflight request, which _headers_ can be used during actual request.
 | Empty
 
 | allowMethods
 | Set<String>
 a| .Access-Control-Allow-Methods
-In response to preflight request, which _methods_ can be used during actual request
+In response to preflight request, which _methods_ can be used during actual request.
 | Empty
 
 | maxAge
 | Integer
 a| .Access-Control-Max-Age
-How long preflight request can be cached in delta seconds
+How long preflight request can be cached in delta seconds.
 | Not included
 |===
 
@@ -439,7 +440,7 @@ Security-related HTTP headers can be set, such as HSTS, CSP and XSS protection.
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-http-security-policy",
-    "version": "1.2.9.Final" // Please check for the latest version, this is just an example.
+    "version": "{{ book.apiman.version.release }}"
 }
 ```
 
@@ -579,7 +580,7 @@ Keycloak's token format and auth mechanism facilitate excellent performance char
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-keycloak-oauth-policy",
-    "version": "1.2.9.Final" // Please check for the latest version, this is just an example.
+    "version": "{{ book.apiman.version.release }}"
 }
 ```
 
@@ -741,7 +742,7 @@ exposed through the managed endpoint.
 {
 	"groupId": "io.apiman.plugins",
 	"artifactId": "apiman-plugins-url-whitelist-policy",
-	"version": "1.2.9.Final" // Please check for the latest version, this is just an example.
+	"version": "{{ book.apiman.version.release }}"
 }
 ```
 
@@ -971,7 +972,7 @@ policy may be a better choice.
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-transformation-policy",
-    "version": "1.2.9.Final" // Please check for the latest version, this is just an example.
+    "version": "{{ book.apiman.version.release }}"
 }
 ```
 
@@ -1028,7 +1029,7 @@ to support both standard REST *and* JSONP at the same time.
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-jsonp-policy",
-    "version": "1.2.9.Final" // Please check for the latest version, this is just an example.
+    "version": "{{ book.apiman.version.release }}"
 }
 ```
 
@@ -1076,7 +1077,7 @@ Set and remove headers on request, response or both. The values can be literal s
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-simple-header-policy",
-    "version": "1.2.9.Final" // Please check for the latest version, this is just an example.
+    "version": "{{ book.apiman.version.release }}"
 }
 ```
 
@@ -1263,7 +1264,7 @@ traffic from the gateway when added as the last policy in the chain.
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-log-policy",
-    "version": "1.2.9.Final" // Please check for the latest version, this is just an example.
+    "version": "{{ book.apiman.version.release }}"
 }
 ```
 
