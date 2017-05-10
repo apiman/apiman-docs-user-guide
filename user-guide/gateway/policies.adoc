@@ -6,25 +6,25 @@ This section of the guide provides more information about each of the policies a
 
 == BASIC Authentication Policy
 [[policy-basic-auth]]
+
 === Description
-This policy enables HTTP BASIC Authentication on an API.  In other words, you can use this
-policy to require clients to provide HTTP BASIC authentication credentials when making requests
-to the managed API.
+
+This policy enables HTTP BASIC Authentication on an API.
+In other words, you can use this policy to require clients to provide HTTP BASIC authentication credentials when making requests to the managed API.
 
 TIP: This is a built-in policy and therefore no plugins need to be installed prior to using it.
 
 === Configuration
-The BASIC Authentication policy has a number of configuration options.  There are several
-top level configuration properties:
+
+The BASIC Authentication policy has a number of configuration options.
+There are several top level configuration properties:
 
 * *realm* (string) : defines the BASIC Auth realm that will be used when responding with an auth challenge (when authentication is missing or fails)
 * *forwardIdentityHttpHeader* (string) : if authentication succeeds, indicates the name of an HTTP header to send with the principal/identity of the authenticated user (useful when the back-end API needs to know the identify of the authenticated user)
 * *requireTransportSecurity* (boolean) : set to true if this policy should fail when receiving a message over an unsecured communication channel (in other words, enabling this will require clients to use *https*)
 * *requireBasicAuth* (boolean) : set to true if BASIC authentication credentials are *required* (set to false if alternative authentication mechanisms, such as OAuth, are also supported)
 
-Additionally, one of the following complex properties must be included in the configuration,
-indicating whether apiman should use JDBC, LDAP, or Static (not recommended for production)
-information as the source of identity used to validate provided user credentials.
+Additionally, one of the following complex properties must be included in the configuration, indicating whether apiman should use JDBC, LDAP, or Static (not recommended for production) information as the source of identity used to validate provided user credentials.
 
 * *jdbcIdentity* (object) : included when you wish to use JDBC to connect to a database containing user and password information
 ** *type* (enum) : what type of JDBC connection to use - options are 'datasource', 'url'
@@ -48,8 +48,9 @@ information as the source of identity used to validate provided user credentials
 * *staticIdentity* (object) : used mostly for testing purposes - allows you to provide a static set of user names and passwords (do not use in production!)
 
 === Sample Configuration (LDAP)
-Here is an example of the JSON configuration you might use when configuring a
-BASIC Authentication policy that uses LDAP to validate the inbound credentials:
+
+Here is an example of the JSON configuration you might use when configuring a BASIC Authentication policy that uses LDAP to validate the inbound credentials:
+
 ```json
 {
    "realm" : "Example",
@@ -68,8 +69,8 @@ BASIC Authentication policy that uses LDAP to validate the inbound credentials:
 ```
 
 === Sample Configuration (JDBC)
-Here is an example of the JSON configuration you might use when configuring a
-BASIC Authentication policy that uses JDBC to validate the inbound credentials:
+
+Here is an example of the JSON configuration you might use when configuring a BASIC Authentication policy that uses JDBC to validate the inbound credentials:
 
 ```json
 {
@@ -92,22 +93,21 @@ BASIC Authentication policy that uses JDBC to validate the inbound credentials:
 
 == Authorization Policy
 [[policy-authorization]]
+
 === Description
-This policy enables fine grained authorization to API resources based on authenticated user roles.  This
-policy can be used to control precisely who (authenticated users) are allowed to access the API, at an
-arbitrarily fine-grained level.
+
+This policy enables fine grained authorization to API resources based on authenticated user roles.
+This policy can be used to control precisely who (authenticated users) are allowed to access the API, at an arbitrarily fine-grained level.
 
 TIP: This is a built-in policy and therefore no plugins need to be installed prior to using it.
 
 === Configuration
-The configuration of this policy consists of a number of rules that are applied to any inbound request
-to the API.  Each rule consists of a regular expression pattern, an HTTP verb, and the role that an
-authenticated user must possess in order for access to be granted.
 
-TIP: It's *very* important to note that this policy must be configured *after* one of the standard
-apiman authentication policies (e.g. the BASIC Authentication policy or the Keycloak OAuth Policy).
-The reason is that an Authentication policy is responsible for extracting the authenticated user's
-roles, which is data that is required for the Authorization Policy to do its work.
+The configuration of this policy consists of a number of rules that are applied to any inbound request to the API.
+Each rule consists of a regular expression pattern, an HTTP verb, and the role that an authenticated user must possess in order for access to be granted.
+
+TIP: It's *very* important to note that this policy must be configured *after* one of the standard apiman authentication policies (e.g. the BASIC Authentication policy or the Keycloak OAuth Policy).
+The reason is that an Authentication policy is responsible for extracting the authenticated user's roles, which is data that is required for the Authorization Policy to do its work.
 
 * *rules* (array) : Array of rules - each rule is applied only if it matches the current request.
 ** *pathPattern* (string regexp) : Pattern that must match the request resource path you'd like the policy to be applicable to.
@@ -117,6 +117,7 @@ roles, which is data that is required for the Authorization Policy to do its wor
 * *requestUnmatched* (boolean) : If the request does not match any of the authorization rules, should it pass or fail?  Set to true if you want the policy to *pass* when no rules are matched.
 
 === Sample Configuration
+
 ```json
 {
    "rules" : [
@@ -136,13 +137,16 @@ roles, which is data that is required for the Authorization Policy to do its wor
 }
 ```
 
-
 == SOAP Authorization Policy
 [[policy-soap-authorization]]
+
 === Description
-This policy is nearly identical to our Authorization Policy, with the exception that it accepts a SOAPAction in the HTTP header. Please note that this policy will only accept a single SOAPAction header, and will not extract the operation name from the SOAP body.
+
+This policy is nearly identical to our Authorization Policy, with the exception that it accepts a SOAPAction in the HTTP header.
+Please note that this policy will only accept a single SOAPAction header, and will not extract the operation name from the SOAP body.
 
 === Plugin
+
 ```json
 {
 	"groupId": "io.apiman.plugins",
@@ -152,6 +156,7 @@ This policy is nearly identical to our Authorization Policy, with the exception 
 ```
 
 === Configuration
+
 Just as with the Authorization policy, you can define any number of rules you'd like.
 
 * *rules* (array) : A single rule that your policy will apply if each of the following properties match:
@@ -162,6 +167,7 @@ Just as with the Authorization policy, you can define any number of rules you'd 
 
 
 === Sample Configuration
+
 ```json
 {
    "rules" : [
@@ -182,16 +188,21 @@ Just as with the Authorization policy, you can define any number of rules you'd 
 
 == IP Whitelist Policy
 [[policy-ip-whitelist]]
+
 === Description
-The IP Whitelist Policy Type is the counterpart to the IP Blacklist Policy type. In the IP Whitelist policy, only inbound API requests from Client Apps, policies, or APIs that satisfy the policy are accepted.
+
+The IP Whitelist Policy Type is the counterpart to the IP Blacklist Policy type.
+In the IP Whitelist policy, only inbound API requests from Client Apps, policies, or APIs that satisfy the policy are accepted.
 
 The IP Blacklist and IP Whitelist policies are complementary, but different, approaches to limiting access to an API:
+
 * The IP Blacklist policy type is exclusive in that you must specify the IP address ranges to be excluded from being able to access the API. Any addresses that you do not explicitly exclude from the policy are able to access the API.
 * The IP Whitelist policy type is inclusive in that you must specify the IP address ranges to be included to be able to access the API. Any addresses that you do not explicitly include are not able to access the API.
 
 TIP: This is a built-in policy and therefore no plugins need to be installed prior to using it.
 
 === Configuration
+
 The configuration parameters for an IP Whitelist Policy are:
 
 * *ipList* (array) : The IP address(es), and/or ranges of addresses that will be allowed to access the API.
@@ -202,6 +213,7 @@ The configuration parameters for an IP Whitelist Policy are:
 * *httpHeader* (string) [optional] : Tells apiman to use the IP address found in the given HTTP request header *instead* of the one associated with the incoming TCP socket.  Useful when going through a proxy, often the value of this is 'X-Forwarded-For'.
 
 === Sample Configuration
+
 ```json
 {
   "ipList" : ["192.168.3.*", "192.168.4.*"],
@@ -212,8 +224,13 @@ The configuration parameters for an IP Whitelist Policy are:
 
 == IP Blacklist Policy
 [[policy-ip-blacklist]]
+
 === Description
-As its name indicates, the IP blacklist policy type blocks access to an API's resources based on the IP address of the client application. The apiman Management UI form used to create an IP blacklist policy enables you to use wildcard characters in specifying the IP addresses to be blocked. In addition, apiman gives you the option of specifying the return error code sent in the response to the client if a request is denied. Note that an IP Blacklist policy in a plan overrides the an IP Whitelist policy in the same plan.
+
+As its name indicates, the IP blacklist policy type blocks access to an API's resources based on the IP address of the client application.
+The apiman Management UI form used to create an IP blacklist policy enables you to use wildcard characters in specifying the IP addresses to be blocked.
+In addition, apiman gives you the option of specifying the return error code sent in the response to the client if a request is denied.
+Note that an IP Blacklist policy in a plan overrides the an IP Whitelist policy in the same plan.
 
 TIP: This is a built-in policy and therefore no plugins need to be installed prior to using it.
 
@@ -228,6 +245,7 @@ The configuration parameters for an IP Blacklist Policy are:
 * *httpHeader* (string) [optional] : Tells apiman to use the IP address found in the given HTTP request header *instead* of the one associated with the incoming TCP socket.  Useful when going through a proxy, often the value of this is 'X-Forwarded-For'.
 
 === Sample Configuration
+
 ```json
 {
   "ipList" : ["192.168.7.*"],
@@ -238,18 +256,25 @@ The configuration parameters for an IP Blacklist Policy are:
 
 == Ignored Resources Policy
 [[policy-ignored-resources]]
-=== Description
-The ignored resources policy type enables you to shield some of an API's resources from being accessed, without blocking access to all the API's resources. Requests made to access to API resources designated as “ignored” result in an HTTP 404 (“not found”) error code. By defining ignored resource policies, apiman enables you to have fine-grained control over which of an API's resources are accessible.
 
-For example, let's say that you have an apiman managed API that provides information to remote staff.  The REST resources provided by this API are structured as follows:
+=== Description
+
+The ignored resources policy type enables you to shield some of an API's resources from being accessed, without blocking access to all the API's resources.
+Requests made to access to API resources designated as “ignored” result in an HTTP 404 (“not found”) error code.
+By defining ignored resource policies, apiman enables you to have fine-grained control over which of an API's resources are accessible.
+
+For example, let's say that you have an apiman managed API that provides information to remote staff.
+The REST resources provided by this API are structured as follows:
 
 /customers
 /customers/{customer id}/orders
 /customers/{customer id}/orders/bad_debts
 
-By setting up multiple ignored resource policies, these policies can work together to give you more flexibility in how you govern access to to your API's resources. What you do is to define multiple plans, and in each plan, allow differing levels of access, based on the paths (expressed as regular expressions)defined, for resources to be ignored. To illustrate, using the above examples:
+By setting up multiple ignored resource policies, these policies can work together to give you more flexibility in how you govern access to to your API's resources.
+What you do is to define multiple plans, and in each plan, allow differing levels of access, based on the paths (expressed as regular expressions)defined, for resources to be ignored.
+To illustrate, using the above examples:
 
-[width="75%",options="header"]
+[width="80%",options="header"]
 |====================
 | This Path                      | Results in these Resources Being Ignored
 | (empty)                        | Access to all resources is allowed
@@ -258,14 +283,17 @@ By setting up multiple ignored resource policies, these policies can work togeth
 | /customers/.*/orders/bad_debts | Denies access to all customer bad debt order information
 |====================
 
-What happens when the policy is applied to an API request is that the apiman Gateway matches the configured paths to the requested API resources. If any of the exclusion paths match, the policy triggers a failure with an HTTP return code of 404.
+What happens when the policy is applied to an API request is that the apiman Gateway matches the configured paths to the requested API resources.
+If any of the exclusion paths match, the policy triggers a failure with an HTTP return code of 404.
 
 The IP-related policy types are less fine-grained in that they allow or block access to all of an API's resources based on the IP address of the client application. We'll look at these policy types next.
 
 TIP: This is a built-in policy and therefore no plugins need to be installed prior to using it.
 
 === Configuration
+
 The configuration parameters for an Ignored Resources Policy are:
+
 * *rules* (array of objects) : The list of matching rules representing the resources to be ignored.
 ** *verb* (enum) : The HTTP verb to be controlled by the rule. Valid values are:
 *** * (matches all verbs)
@@ -280,6 +308,7 @@ The configuration parameters for an Ignored Resources Policy are:
 ** *pathPattern* (string regexp) : A regular expression used to match the REST resource being hidden.
 
 === Sample Configuration
+
 ```json
 {
   "rules" : [
@@ -292,15 +321,17 @@ The configuration parameters for an Ignored Resources Policy are:
 
 == Time Restricted Access Policy
 [[policy-time-restricted-access]]
+
 === Description
-This policy is used to only allow access to an API during certain times.  In fact, the policy can
-be configured to apply different time restrictions to different API resources (matched via
-regular expressions).  This allows you to control *when* client and users are allowed to access
-your API.
+
+This policy is used to only allow access to an API during certain times.
+In fact, the policy can be configured to apply different time restrictions to different API resources (matched via regular expressions).
+This allows you to control *when* client and users are allowed to access your API.
 
 TIP: This is a built-in policy and therefore no plugins need to be installed prior to using it.
 
 === Configuration
+
 The configuration parameters for a Time Restricted Access Policy are:
 
 * *rules* (array of objects) : The list of matching rules representing the resources being controlled and the time ranges they are allowed to be accessed.
@@ -313,6 +344,7 @@ The configuration parameters for a Time Restricted Access Policy are:
 TIP: If none of the configured rules matches the request resource path/destination, then no rules will be applied and the request will succeed.
 
 === Sample Configuration
+
 ```json
 {
     "rules": [
@@ -336,8 +368,11 @@ TIP: If none of the configured rules matches the request resource path/destinati
 
 == CORS Policy
 [[policy-cors]]
+
 === Description
-A policy implementing CORS (Cross-origin resource sharing): a method of defining access to resources outside of the originating domain. It is principally a security mechanism to prevent the loading of resources from unexpected domains, for instance via XSS injection attacks.
+
+A policy implementing CORS (Cross-origin resource sharing): a method of defining access to resources outside of the originating domain.
+It is principally a security mechanism to prevent the loading of resources from unexpected domains, for instance via XSS injection attacks.
 
 For further references, see http://www.w3.org/TR/2014/REC-cors-20140116/[CORS W3C Recommendation 16 January 2014] and https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Access-Control-Allow-Origin[MDN's articles].
 
@@ -352,6 +387,7 @@ For further references, see http://www.w3.org/TR/2014/REC-cors-20140116/[CORS W3
 ```
 
 === Configuration
+
 The configuration options available, are:
 
 .CORS policy configuration
@@ -364,44 +400,44 @@ The configuration options available, are:
 
 | errorOnCorsFailure
 | Boolean
-a| .Error on CORS failure
+a| *Error on CORS failure*
 When true, any request that fails CORS validation will be terminated with an appropriate error. When false, the request will still be sent to the backend API, but the browser will be left to enforce the CORS failure. In both cases valid CORS headers will be set.
 | true
 
 | allowOrigin
 | Set<String>
-a| .Access-Control-Allow-Origin
+a| *Access-Control-Allow-Origin*
 List of origins permitted to make CORS requests through the gateway. By default same-origin is permitted, and cross-origin is forbidden.
 A special entry of `*` permits all CORS requests.
 | Empty
 
 | allowCredentials
 | Boolean
-a| .Access-Control-Allow-Credentials
+a| *Access-Control-Allow-Credentials*
 Whether response may be exposed when the `credentials` flag is set to true on the request.
 | false
 
 | exposeHeaders
 | Set<String>
-a| .Access-Control-Expose-Headers
+a| *Access-Control-Expose-Headers*
 Which non-simple headers the browser may expose during CORS.
 | Empty
 
 | allowHeaders
 | Set<String>
-a| .Access-Control-Allow-Headers
+a| *Access-Control-Allow-Headers*
 In response to preflight request, which _headers_ can be used during actual request.
 | Empty
 
 | allowMethods
 | Set<String>
-a| .Access-Control-Allow-Methods
+a| *Access-Control-Allow-Methods*
 In response to preflight request, which _methods_ can be used during actual request.
 | Empty
 
 | maxAge
 | Integer
-a| .Access-Control-Max-Age
+a| *Access-Control-Max-Age*
 How long preflight request can be cached in delta seconds.
 | Not included
 |===
@@ -431,7 +467,9 @@ How long preflight request can be cached in delta seconds.
 
 == HTTP Security Policy
 [[policy-http-security]]
+
 === Description
+
 Security-related HTTP headers can be set, such as HSTS, CSP and XSS protection.
 
 === Plugin
@@ -457,31 +495,31 @@ Security-related HTTP headers can be set, such as HSTS, CSP and XSS protection.
 
 | frameOptions
 | Enum [DENY, SAMEORIGIN, DISABLED]
-a| .Frame Options
+a| *Frame Options*
 Defines if, or how, a resource should be displayed in a frame, iframe or object.
 | DISABLED
 
 | xssProtection
 | Enum [OFF, ON, BLOCK, DISABLED]
-a| .XSS Protection
+a| *XSS Protection*
 Enable or disable XSS filtering in the UA.
 | DISABLED
 
 | contentTypeOptions
 | Boolean
-a| .X-Content-Type-Options
+a| *X-Content-Type-Options*
 Prevent MIME-sniffing to any type other than the declared Content-Type.
 | false
 
 | hsts
 | <<_hsts>>
-a| .HTTP Strict Transport Security
+a| *HTTP Strict Transport Security*
 Configure HSTS.
 | None
 
 | contentSecurityPolicy
 | <<contentSecurityPolicy>>
-a| .Content Security Policy
+a| *Content Security Policy*
 CSP definition.
 | None
 
@@ -499,7 +537,7 @@ CSP definition.
 
 | enabled
 | Boolean
-a| .HSTS
+a| *HSTS*
 Enable HTTP Strict Transport
 | false
 
@@ -510,14 +548,17 @@ Enable HTTP Strict Transport
 
 | maxAge
 | Integer
-a| .Maximum age
+a| *Maximum age*
 Delta seconds user agents should cache HSTS status for
 | 0
 
 | preload
 | Boolean
-a| .Enable HSTS preloading
-Flag to verify HSTS preload status. Popular browsers contain a hard-coded (pinned) list of domains and certificates, which they always connect securely with. This mitigates a wide range of identity and MIITM attacks, and is particularly useful for high-profile domains. Users must submit a request for their domain to be included in the scheme.
+a| *Enable HSTS preloading*
+Flag to verify HSTS preload status.
+Popular browsers contain a hard-coded (pinned) list of domains and certificates, which they always connect securely with.
+This mitigates a wide range of identity and MIITM attacks, and is particularly useful for high-profile domains.
+Users must submit a request for their domain to be included in the scheme.
 | false
 |===
 
@@ -534,13 +575,13 @@ Flag to verify HSTS preload status. Popular browsers contain a hard-coded (pinne
 
 | mode
 | Enum [ENABLED, REPORT_ONLY, DISABLED]
-a| .CSP Mode
+a| *CSP Mode*
 Which content security policy mode to use.
 | DISABLED
 
 | csp
 | String
-a| .Content Security Policy
+a| *Content Security Policy*
 A valid CSP definition to apply
 | Empty string
 
@@ -568,11 +609,15 @@ A valid CSP definition to apply
 
 == Keycloak OAuth Policy
 [[policy-keycloak-oauth]]
+
 === Description
 
-A http://www.keycloak.org[Keycloak]-specific OAuth2 policy to regulate access to APIs. This plugin enables a wide range of sophisticated auth facilities in combination with, for instance, Keycloak's federation, brokering and user management capabilities. An exploration of the basics can be found http://www.apiman.io/blog/gateway/security/oauth2/keycloak/authentication/authorization/1.2.x/2016/01/22/keycloak-oauth2-redux.html[in our blog], but we encourage users to explore the http://keycloak.jboss.org/docs.html[project documentation], as there is a tremendous depth and breadth of functionality, most of which work extremely well with apiman.
+A http://www.keycloak.org[Keycloak]-specific OAuth2 policy to regulate access to APIs.
+This plugin enables a wide range of sophisticated auth facilities in combination with, for instance, Keycloak's federation, brokering and user management capabilities.
+An exploration of the basics can be found http://www.apiman.io/blog/gateway/security/oauth2/keycloak/authentication/authorization/1.2.x/2016/01/22/keycloak-oauth2-redux.html[in our blog], but we encourage users to explore the http://keycloak.jboss.org/docs.html[project documentation], as there is a tremendous depth and breadth of functionality, most of which work extremely well with apiman.
 
-Keycloak's token format and auth mechanism facilitate excellent performance characteristics, with users able to easily tune the setup to meet their security requirements. In general, this is one of the best approaches for achieving security without greatly impacting performance.
+Keycloak's token format and auth mechanism facilitate excellent performance characteristics, with users able to easily tune the setup to meet their security requirements.
+In general, this is one of the best approaches for achieving security without greatly impacting performance.
 
 === Plugin
 
@@ -597,55 +642,59 @@ Keycloak's token format and auth mechanism facilitate excellent performance char
 
 | requireOauth
 | Boolean
-a| .Require auth token
+a| *Require auth token*
 Terminate request if no OAuth token is provided.
 | true
 
 | requireTransportSecurity
 | Boolean
-a| .Require transport security
-Any request used without transport security will be rejected. OAuth2 requires transport security (e.g. TLS, SSL) to provide protection against replay attacks. It is strongly advised for this option to be switched on
+a| *Require transport security*
+Any request used without transport security will be rejected.
+OAuth2 requires transport security (e.g. TLS, SSL) to provide protection against replay attacks.
+It is strongly advised for this option to be switched on
 | true
 
 | blacklistUnsafeTokens
 | Boolean
-a| .Blacklist unsafe tokens
-Any tokens used without transport security will be blackedlisted in all gateways to mitigate associated security risks. Uses distributed data store to share blacklist
+a| *Blacklist unsafe tokens*
+Any tokens used without transport security will be blackedlisted in all gateways to mitigate associated security risks.
+Uses distributed data store to share blacklist
 | true
 
 | stripTokens
 | Boolean
-a| .Strip tokens
+a| *Strip tokens*
 Remove any Authorization header or token query parameter before forwarding traffic to the API
 | true
 
 | realm
 | String
-a| .Realm name
+a| *Realm name*
 If you are using KeyCloak 1.2.0x or later this must be a full iss domain path (e.g. `https://mykeycloak.local/auth/realms/apimanrealm`); pre-1.2.0x simply use the realm name (e.g. `apimanrealm`).
 | Empty
 
 | realmCertificateString
 | String
-a| .Keycloak Realm Certificate
-To validate OAuth2 requests. Must be a PEM-encoded X.509 certificate. This can be copied from the Keycloak console.
+a| *Keycloak Realm Certificate*
+To validate OAuth2 requests.
+Must be a PEM-encoded X.509 certificate. This can be copied from the Keycloak console.
 | Empty
 
 | delegateKerberosTicket
 | Boolean
-a| .Delegate Kerberos Ticket
+a| *Delegate Kerberos Ticket*
 Delegate any Kerberos Ticket embedded in the Keycloak token to the API (via the Authorization header).
 | false
 
 | forwardRoles
 | <<forwardRoles>>[]
-a| .Forward Keycloak roles
+a| *Forward Keycloak roles*
 Set whether to forward roles to an authorization policy.
 | None
 
 | forwardAuthInfo
 | <<forwardAuthInfo>>[]
-a| .Forward auth information
+a| *Forward auth information*
 Set auth information from the token into header(s).
 | None
 
@@ -664,21 +713,24 @@ Set auth information from the token into header(s).
 
 | active
 | Boolean
-a| .Forward roles
-Opt whether to forward any type of roles. By default these will be *realm roles* unless the `applicationName` option is also provided.
+a| *Forward roles*
+Opt whether to forward any type of roles.
+By default these will be *realm roles* unless the `applicationName` option is also provided.
 | false
 
 | applicationName (optional)
 | String
-a| .Application Name
-Which application roles to forward. Note that you cannot presently forward realm and application roles, only one or the other.
+a| *Application Name*
+Which application roles to forward.
+Note that you cannot presently forward realm and application roles, only one or the other.
 | Empty
 
 |===
 
 ==== forwardAuthInfo
 
-TIP: Fields from the token can be set as headers and forwarded to the API. All https://openid.net/specs/openid-connect-basic-1_0.html#StandardClaims[standard claims], custom claims and https://openid.net/specs/openid-connect-basic-1_0.html#IDToken[ID token fields] are available (case sensitive). A special value of *access_token* will forward the entire encoded token. Nested claims can be accessed by using javascript dot syntax (e.g: `address.country`, `address.formatted`).
+TIP: Fields from the token can be set as headers and forwarded to the API. All https://openid.net/specs/openid-connect-basic-1_0.html#StandardClaims[standard claims], custom claims and https://openid.net/specs/openid-connect-basic-1_0.html#IDToken[ID token fields] are available (case sensitive).
+A special value of *access_token* will forward the entire encoded token. Nested claims can be accessed by using javascript dot syntax (e.g: `address.country`, `address.formatted`).
 
 .Forward Keycloak token information
 [cols="2,1,4,1", options="header"]
@@ -691,13 +743,13 @@ TIP: Fields from the token can be set as headers and forwarded to the API. All h
 
 | headers
 | String
-a| .Header
+a| *Header*
 The header value to set (to paired field).
 | None
 
 | field
 | String
-a| .Field
+a| *Field*
 The token field name.
 | None
 
@@ -732,12 +784,14 @@ The token field name.
 
 == URL Whitelist Policy
 [[policy-url-whitelist]]
+
 === Description
-This policy allows users to explicitly allow only certain API subpaths to be accessed.  It's
-particularly useful when only a small subset of resources from a back-end API should be
-exposed through the managed endpoint.
+
+This policy allows users to explicitly allow only certain API subpaths to be accessed.
+It's particularly useful when only a small subset of resources from a back-end API should be exposed through the managed endpoint.
 
 === Plugin
+
 ```json
 {
 	"groupId": "io.apiman.plugins",
@@ -747,9 +801,8 @@ exposed through the managed endpoint.
 ```
 
 === Configuration
-Configuration of the URL Whitelist Policy consists of a property to control the stripping
-of the managed endpoint prefix, and then a list of items representing the endpoint paths that
-are allowed.
+
+Configuration of the URL Whitelist Policy consists of a property to control the stripping of the managed endpoint prefix, and then a list of items representing the endpoint paths that are allowed.
 
 * *removePathPrefix* (boolean) : Set to true if you want the managed endpoint prefix to be stripped out before trying to match the request path to the whitelisted items (this is typically set to 'true').
 * *whitelist* (array of objects) : A list of items, where each item represents an API sub-resource that should be allowed.
@@ -764,6 +817,7 @@ are allowed.
 ** *methodTrace* (boolean) : True if http TRACE should be allowed (default *false*).
 
 === Sample Configuration
+
 ```json
 {
     "removePathPrefix" : true,
@@ -787,11 +841,20 @@ are allowed.
 
 == Limiting Policies
 
-Some apiman policies provide an all-or-nothing level of control over access to managed APIs. For example, IP Blacklist or Whitelist policies either block or enable all access to a managed API, based on the IP address of the client. Rate limiting and quota policies provide you with more flexible ways to govern access to managed APIs. With rate limiting and quota policies, you can place limits on either the number of requests an API will accept over a specified period of time, or the total number of of bytes in the API requests. In addition, you can use combinations of fine-grained and coarse-grained rate limiting policies together to give you more flexibility in governing access to your managed API.
+Some apiman policies provide an all-or-nothing level of control over access to managed APIs.
+For example, IP Blacklist or Whitelist policies either block or enable all access to a managed API, based on the IP address of the client.
+Rate limiting and quota policies provide you with more flexible ways to govern access to managed APIs.
+With rate limiting and quota policies, you can place limits on either the number of requests an API will accept over a specified period of time, or the total number of of bytes in the API requests.
+In addition, you can use combinations of fine-grained and coarse-grained rate limiting policies together to give you more flexibility in governing access to your managed API.
 
-The ability to throttle API requests based on request counts and bytes transferred provides even greater flexibility in implementing policies. APIs that transfer larger amounts of data, but rely on fewer API requests can have that data transfer throttled on a per byte basis. For example, an API that is data intensive, will return a large amount of data in response to each API request. The API may only receive a request a few hundreds of times a day, but each request may result in several megabytes of data being transferred. Let's say that we want to limit the amount of data transferred to 6GB per hour. For this type of API, we could set a rate limiting policy to allow for one request per minute, and then augment that policy with a transfer quota policy of 100Mb per hour.
+The ability to throttle API requests based on request counts and bytes transferred provides even greater flexibility in implementing policies.
+APIs that transfer larger amounts of data, but rely on fewer API requests can have that data transfer throttled on a per byte basis.
+For example, an API that is data intensive, will return a large amount of data in response to each API request.
+The API may only receive a request a few hundreds of times a day, but each request may result in several megabytes of data being transferred.
+Let's say that we want to limit the amount of data transferred to 6GB per hour. For this type of API, we could set a rate limiting policy to allow for one request per minute, and then augment that policy with a transfer quota policy of 100Mb per hour.
 
-Each of these policies, if used singly, can be effective in throttling requests. apiman, however, adds an additional layer of flexibility to your use of these policy types by enabling you to use them in combinations.
+Each of these policies, if used singly, can be effective in throttling requests.
+apiman, however, adds an additional layer of flexibility to your use of these policy types by enabling you to use them in combinations.
 
 apiman supports these types of limiting policies:
 
@@ -801,13 +864,17 @@ apiman supports these types of limiting policies:
 
 == Rate Limiting Policy
 [[policy-rate-limiting]]
+
 === Description
 
-The Rate Limiting Policy type governs the number of times requests are made to an API within a specified time period. The requests can be filtered by user, application, or API and can set the level of granularity for the time period to second, minute, hour, day, month, or year. The intended use of this policy type is for fine grained processing (e.g., 10 requests per second).
+The Rate Limiting Policy type governs the number of times requests are made to an API within a specified time period.
+The requests can be filtered by user, application, or API and can set the level of granularity for the time period to second, minute, hour, day, month, or year.
+The intended use of this policy type is for fine grained processing (e.g., 10 requests per second).
 
 TIP: This is a built-in policy and therefore no plugins need to be installed prior to using it.
 
 === Configuration
+
 The configuration parameters for a Rate Limiting Policy are:
 
 * *limit* (integer) : This is the number of requests that must be received before the policy will trigger.
@@ -827,6 +894,7 @@ The configuration parameters for a Rate Limiting Policy are:
 * *headerReset* (string) [optional] : HTTP response header that apiman will use to store the number of seconds until the limit is reset.
 
 === Sample Configuration
+
 ```json
 {
   "limit" : 100,
@@ -840,12 +908,15 @@ The configuration parameters for a Rate Limiting Policy are:
 
 == Quota Policy
 [[policy-quota]]
+
 === Description
-The Quota Policy type performs the same basic functionality as the Rate Limiting policy type., however, the intended use of this policy type is for less fine grained processing (e.g., 10,000 requests per month).
+
+The Quota Policy type performs the same basic functionality as the Rate Limiting policy type, however, the intended use of this policy type is for less fine grained processing (e.g., 10,000 requests per month).
 
 TIP: This is a built-in policy and therefore no plugins need to be installed prior to using it.
 
 === Configuration
+
 The configuration parameters for a Quota Policy are:
 
 * *limit* (integer) : This is the number of requests that must be received before the policy will trigger.
@@ -863,6 +934,7 @@ The configuration parameters for a Quota Policy are:
 * *headerReset* (string) [optional] : HTTP response header that apiman will use to store the number of seconds until the limit is reset.
 
 === Sample Configuration
+
 ```json
 {
   "limit" : 100000,
@@ -876,12 +948,15 @@ The configuration parameters for a Quota Policy are:
 
 == Transfer Quota Policy
 [[policy-transfer-quota]]
+
 === Description
+
 In contrast to the other policy types, Transfer Quota tracks the number of bytes transferred (either uploaded or downloaded) rather than the total number of requests made.
 
 TIP: This is a built-in policy and therefore no plugins need to be installed prior to using it.
 
 === Configuration
+
 The configuration parameters for a Quota Policy are:
 
 * *direction* (enum) : Indicates whether uploads, downloads, or both directions should count against the limit.  Value values are:
@@ -903,6 +978,7 @@ The configuration parameters for a Quota Policy are:
 * *headerReset* (string) [optional] : HTTP response header that apiman will use to store the number of seconds until the limit is reset.
 
 === Sample Configuration
+
 ```json
 {
   "direction" : "download",
@@ -919,31 +995,31 @@ The configuration parameters for a Quota Policy are:
 
 == URL Rewriting Policy
 [[policy-url-rewriting]]
+
 === Description
-This policy is used to re-write responses from the back-end API such that they will be modified by
-fixing up any incorrect URLs found with modified ones.  This is useful because apiman works through
-an API Gateway, and in some cases an API might return URLs to followup action or data endpoints.  In
-these cases the back-end API will likely be configured to return a URL pointing to the unmanaged API
-endpoint.  This policy can fix up those URL references so that they point to the managed API endpoint
-(the API Gateway endpoint) instead.
+
+This policy is used to re-write responses from the back-end API such that they will be modified by fixing up any incorrect URLs found with modified ones.
+This is useful because apiman works through an API Gateway, and in some cases an API might return URLs to followup action or data endpoints.
+In these cases the back-end API will likely be configured to return a URL pointing to the unmanaged API endpoint.
+This policy can fix up those URL references so that they point to the managed API endpoint (the API Gateway endpoint) instead.
 
 TIP: This is a built-in policy and therefore no plugins need to be installed prior to using it.
 
 === Configuration
-This policy requires some basic configuration, including a regular expression used to match the
-URL, as well as a replacement value.
+
+This policy requires some basic configuration, including a regular expression used to match the URL, as well as a replacement value.
 
 * *fromRegex* (string regex) : A regular expression used to identify a matching URL found in the response.
 * *toReplacement* (string) : The replacement URL - regular expression groups identified in the *fromRegex* can be used.
 * *processBody* (boolean) : Set to true if URLs should be replaced in the response body.
 * *processHeaders* (boolean) : Set to true if URLs should be replaced in the response headers.
 
-TIP: This policy *cannot* be used for any other replacements besides URLs - the policy is implemented
-specifically to find and replace valid URLs.  As a result, arbitrary regular expression matching will
-not work (the policy scans for URLs and then matches those URLs against the configured regex).  This
-is done for performance reasons.
+TIP: This policy *cannot* be used for any other replacements besides URLs - the policy is implemented specifically to find and replace valid URLs.
+As a result, arbitrary regular expression matching will not work (the policy scans for URLs and then matches those URLs against the configured regex).
+This is done for performance reasons.
 
 === Sample Configuration
+
 ```json
 {
     "fromRegex" : "https?://[^\/]*\/([.\/]*)",
@@ -956,18 +1032,18 @@ is done for performance reasons.
 
 == Transformation Policy
 [[policy-transformation]]
-=== Description
-This policy converts an API format between JSON and XML.  If an API is implemented to
-return XML, but a client would prefer to receive JSON data, this policy can be used
-to automatically convert both the request and response bodies.  In this way, the client
-can work with JSON data even though the back-end API requires XML (and responds with
-XML).
 
-Note that this policy is very generic, and does an automatic conversion between XML
-and JSON.  For more control over the specifics of the format conversion, a custom
-policy may be a better choice.
+=== Description
+
+This policy converts an API format between JSON and XML.
+If an API is implemented to return XML, but a client would prefer to receive JSON data, this policy can be used to automatically convert both the request and response bodies.
+In this way, the client can work with JSON data even though the back-end API requires XML (and responds with XML).
+
+Note that this policy is very generic, and does an automatic conversion between XML and JSON.
+For more control over the specifics of the format conversion, a custom policy may be a better choice.
 
 === Plugin
+
 ```json
 {
     "groupId": "io.apiman.plugins",
@@ -977,10 +1053,11 @@ policy may be a better choice.
 ```
 
 === Configuration
+
 The configuration of this policy consists of two properties which indicate:
 
-1. the format required by the client
-2. the format required by the back-end server
+. the format required by the client
+. the format required by the back-end server
 
 From these two properties, the policy can decide how (and if) to convert the data.
 
@@ -988,6 +1065,7 @@ From these two properties, the policy can decide how (and if) to convert the dat
 * *serverFormat* (enum) : The format required by the server, possible values are:  'XML', 'JSON'
 
 === Sample Configuration
+
 ```json
 {
    "clientFormat" : "JSON",
@@ -997,10 +1075,11 @@ From these two properties, the policy can decide how (and if) to convert the dat
 
 == JSONP Policy
 [[policy-jsonp]]
+
 === Description
-This policy turns a standard REST endpoint into a https://en.wikipedia.org/wiki/JSONP[JSONP]
-compatible endpoint.  For example, a REST endpoint may typically return the following JSON
-data:
+
+This policy turns a standard REST endpoint into a https://en.wikipedia.org/wiki/JSONP[JSONP] compatible endpoint.
+For example, a REST endpoint may typically return the following JSON data:
 
 ```json
 {
@@ -1009,8 +1088,7 @@ data:
 }
 ```
 
-If the JSONP policy is applied to this API, then the caller must provide a JSONP callback
-function name via the URL (for details on this, see the *Configuration* section below).
+If the JSONP policy is applied to this API, then the caller must provide a JSONP callback function name via the URL (for details on this, see the *Configuration* section below).
 When this is done, the API might respond with this instead:
 
 ```json
@@ -1020,11 +1098,11 @@ callbackFunction({
 })
 ```
 
-TIP: If the API client does not send the JSONP callback function name in the URL (via the
-configured query parameter name), this policy will do nothing.  This allows managed endpoints
-to support both standard REST *and* JSONP at the same time.
+TIP: If the API client does not send the JSONP callback function name in the URL (via the configured query parameter name), this policy will do nothing.
+This allows managed endpoints to support both standard REST *and* JSONP at the same time.
 
 === Plugin
+
 ```json
 {
     "groupId": "io.apiman.plugins",
@@ -1034,21 +1112,21 @@ to support both standard REST *and* JSONP at the same time.
 ```
 
 === Configuration
-The JSONP policy has a single configuration property, which can be used to specify the
-name of the HTTP query parameter that the caller must use to pass the name of the
-JSONP callback function.
+
+The JSONP policy has a single configuration property, which can be used to specify the name of the HTTP query parameter that the caller must use to pass the name of the JSONP callback function.
 
 * *callbackParamName* (string) : Name of the HTTP query parameter that should contain the JSONP callback function name.
 
 === Sample Configuration
+
 ```json
 {
    "callbackParamName" : "callback"
 }
 ```
 
-If the above configuration were to be used, the API client (caller) must send the JSONP callback
-function name in the URL of the request as a query parameter named *callback*.  For example:
+If the above configuration were to be used, the API client (caller) must send the JSONP callback function name in the URL of the request as a query parameter named *callback*.
+For example:
 
 ```
 GET /path/to/resource?callback=myCallbackFunction HTTP/1.1
@@ -1067,9 +1145,12 @@ myCallbackFunction({
 
 == Simple Header Policy
 [[policy-simple-header]]
+
 === Description
 
-Set and remove headers on request, response or both. The values can be literal strings, environment or system properties. Headers can be removed by simple string equality or regular expression.
+Set and remove headers on request, response or both.
+The values can be literal strings, environment or system properties.
+Headers can be removed by simple string equality or regular expression.
 
 === Plugin
 
@@ -1093,13 +1174,13 @@ Set and remove headers on request, response or both. The values can be literal s
 
 | addHeaders
 | <<addHeaders>>[]
-a| .Add and overwrite headers
+a| *Add and overwrite headers*
 Add headers to a request, response or both.
 | None
 
 | stripHeaders
 | <<stripHeaders>>[]
-a| .Strip headers
+a| *Strip headers*
 Remove headers from a request, response or both when patterns match.
 | None
 
@@ -1118,19 +1199,19 @@ Remove headers from a request, response or both when patterns match.
 
 | headerName
 | String
-a| .Header Name
+a| *Header Name*
 The name of the header to set.
 | Empty
 
 | headerValue
 | String
-a| .Header Value
+a| *Header Value*
 The value of the header to set, or key into the environment or system properties, depending upon the value of `valueType`.
 | Empty
 
 | valueType
 | Enum [String, Env, "System Properties"]
-a| .Value Type
+a| *Value Type*
 String:: Treat as a literal value.
 Env:: Treat as a key into the environment `Env[valueType]`, and set the returned value.
 System Properties:: Treat as a key into the JVM's System Properties, and set the returned value.
@@ -1138,7 +1219,7 @@ System Properties:: Treat as a key into the JVM's System Properties, and set the
 
 | applyTo
 | Enum [Request, Response, Both]
-a| .Where to apply rule
+a| *Where to apply rule*
 Request:: Request only.
 Response:: Response only.
 Both:: Both request and response.
@@ -1146,7 +1227,7 @@ Both:: Both request and response.
 
 | overwrite
 | Boolean
-a| .Overwrite
+a| *Overwrite*
 Overwrite any existing header with same name.
 | false
 
@@ -1165,21 +1246,21 @@ Overwrite any existing header with same name.
 
 | stripType
 | Enum[Key, Value]
-a| .Strip when
+a| *Strip when*
 Key:: `pattern` matches key.
 Value:: `pattern` matches value.
 | None
 
 | with
 | Enum[String, Regex]
-a| .With matcher type
+a| *With matcher type*
 String:: Case-insensitive string equality.
 Regex:: Case-insensitive regular expression.
 | Empty
 
 | pattern
 | String
-a| .Using pattern
+a| *Using pattern*
 String to match or compile into a regex, depending on the value of `with`.
 | Empty
 
@@ -1231,21 +1312,22 @@ String to match or compile into a regex, depending on the value of `with`.
 
 == Caching Policy
 [[policy-caching]]
+
 === Description
-Allows caching of API responses in the Gateway to reduce overall traffic to the back-end API.  The
-caching policy is currently very naive and only supports a simple "time-to-live" approach to
-caching.
+
+Allows caching of API responses in the Gateway to reduce overall traffic to the back-end API.
+The caching policy is currently very naive and only supports a simple "time-to-live" approach to caching.
 
 TIP: This is a built-in policy and therefore no plugins need to be installed prior to using it.
 
 === Configuration
-The caching policy only supports a single configuration options, which is the time to live
-in seconds.
+
+The caching policy only supports a single configuration options, which is the time to live in seconds.
 
 * *ttl* (long) : Number of seconds to cache the response.
 
-
 === Sample Configuration
+
 ```json
 {
    "ttl" : 60
@@ -1254,12 +1336,14 @@ in seconds.
 
 == Log Policy
 [[policy-log]]
+
 === Description
-A policy that logs the headers to standard out.  Useful to analyse inbound HTTP traffic to
-the gateway when added as the first policy in the chain or to analyse outbound HTTP
-traffic from the gateway when added as the last policy in the chain.
+
+A policy that logs the headers to standard out.
+Useful to analyse inbound HTTP traffic to the gateway when added as the first policy in the chain or to analyse outbound HTTP traffic from the gateway when added as the last policy in the chain.
 
 === Plugin
+
 ```json
 {
     "groupId": "io.apiman.plugins",
@@ -1269,12 +1353,14 @@ traffic from the gateway when added as the last policy in the chain.
 ```
 
 === Configuration
-The Log Policy can be configured to output the request headers, the response headers, or
-both.  When configuring this policy via the apiman REST API, there is only property:
+
+The Log Policy can be configured to output the request headers, the response headers, or both.
+When configuring this policy via the apiman REST API, there is only property:
 
 * *direction* (enum) : Which direction you wish to log, options are: 'request', 'response', 'both'
 
 === Sample Configuration
+
 ```json
 {
    "direction" : "both"
