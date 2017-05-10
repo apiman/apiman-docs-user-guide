@@ -44,11 +44,13 @@ This approach also has the side benefit of centralizing configuration of authent
 Therefore the API management layer must provide authentication capabilities using a wide range of protocols including BASIC, digest, OAuth, etc.
 
 === Throttling/Rate Limiting
+
 The API management layer is a convenient place to ensure throttling (also known as rate limiting) to your APIs.
 Throttling is a way to prevent individual clients from issuing too many requests to an API.
 Because all requests to an API go through the API Gateway it is an excellent place to do this throttling work.
 
 === Metering/Billing
+
 There are a number of reasons why an API provider would be interested in the number of requests made to her API.
 The most common reason for public facing APIs is to implement billing based on usage per consumer.
 Metering is the feature that provides this API management capability.
