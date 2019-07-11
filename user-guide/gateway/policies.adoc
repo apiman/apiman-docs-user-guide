@@ -1149,7 +1149,7 @@ myCallbackFunction({
 === Description
 
 Set and remove headers on request, response or both.
-The values can be literal strings, environment or system properties.
+The values can be literal strings, environment, system properties or request headers.
 Headers can be removed by simple string equality or regular expression.
 
 === Plugin
@@ -1210,11 +1210,12 @@ The value of the header to set, or key into the environment or system properties
 | Empty
 
 | valueType
-| Enum [String, Env, "System Properties"]
+| Enum [String, Env, "System Properties", Header]
 a| *Value Type*
 String:: Treat as a literal value.
 Env:: Treat as a key into the environment `Env[valueType]`, and set the returned value.
 System Properties:: Treat as a key into the JVM's System Properties, and set the returned value.
+Header:: Treat as key into the http request headers, and set the returned value.
 | None
 
 | applyTo
@@ -1289,6 +1290,13 @@ String to match or compile into a regex, depending on the value of `with`.
       "headerName": "X-JAVA-VERSION-FROM-PROPS",
       "headerValue": "java.version",
       "valueType": "System Properties",
+      "applyTo": "Request",
+      "overwrite": false
+    },
+    {
+      "headerName": "X-NEW-HTTP-HEADER",
+      "headerValue": "X-OLD-HTTP-HEADER",
+      "valueType": "Header",
       "applyTo": "Request",
       "overwrite": false
     }
