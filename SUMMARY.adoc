@@ -4,10 +4,12 @@
 
 === Apiman Gateway
 . link:user-guide/gateway/concepts.adoc[Concepts]
+. link:user-guide/gateway/policies.adoc[Policy Types]
 . link:user-guide/gateway/policies.adoc[Policies]
 .. link:user-guide/gateway/policies.adoc#_authorization_policy[Authorization]
 .. link:user-guide/gateway/policies.adoc#_basic_authentication_policy[BASIC Auth]
-.. link:user-guide/gateway/policies.adoc#_caching_policy[Caching Policy]
+.. link:user-guide/gateway/policies.adoc#_caching_policy[Caching Policy (Deprecated)]
+.. link:user-guide/gateway/policies.adoc#_caching_resources_policy[Caching Resources Policy]
 .. link:user-guide/gateway/policies.adoc#_cors_policy[CORS]
 .. link:user-guide/gateway/policies.adoc#_http_security_policy[HTTP Security]
 .. link:user-guide/gateway/policies.adoc#_ignored_resources_policy[Ignored Resources]
