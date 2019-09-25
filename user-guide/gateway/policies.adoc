@@ -1238,7 +1238,7 @@ The value of the header to set, or key into the environment or system properties
 | Enum [String, Env, "System Properties", Header]
 a| *Value Type*
 String:: Treat as a literal value.
-Env:: Treat as a key into the environment `Env[valueType]`, and set the returned value.
+Env:: Treat as a key into the environment `Env[headerValue]`, and set the returned value.
 System Properties:: Treat as a key into the JVM's System Properties, and set the returned value.
 Header:: Treat as key into the http request headers, and set the returned value.
 | None
