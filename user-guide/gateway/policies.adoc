@@ -1139,7 +1139,7 @@ TIP: This is a built-in policy and therefore no plugins need to be installed pri
 
 The configuration parameters for a Rate Limiting Policy are:
 
-* *limit* (integer) : This is the number of requests that must be received before the policy will trigger.
+* *limit* (integer) : This is the number of requests that must be received before the policy will trigger. Maximum value is 9007199254740991 (2^53 - 1).
 * *granularity* (enum) : The apiman element for which the requests are counted. Valid values are:
 ** User
 ** Api
