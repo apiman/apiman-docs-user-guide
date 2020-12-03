@@ -596,7 +596,7 @@ The configuration parameters for an Ignored Resources Policy are:
 As its name indicates, the IP blacklist policy type blocks access to an API's resources based on the IP address of the client application.
 The apiman Management UI form used to create an IP blacklist policy enables you to use wildcard characters in specifying the IP addresses to be blocked.
 In addition, apiman gives you the option of specifying the return error code sent in the response to the client if a request is denied.
-Note that an IP Blacklist policy in a plan overrides the an IP Whitelist policy in the same plan.
+Note that an IP Blacklist policy in a plan overrides an IP Whitelist policy.
 
 TIP: This is a built-in policy and therefore no plugins need to be installed prior to using it.
 
