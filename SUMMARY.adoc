@@ -11,6 +11,7 @@
 .. link:user-guide/gateway/policies.adoc#_caching_policy_depracted[Caching Policy (Deprecated)]
 .. link:user-guide/gateway/policies.adoc#_caching_resources_policy[Caching Resources Policy]
 .. link:user-guide/gateway/policies.adoc#_cors_policy[CORS]
+.. link:user-guide/gateway/policies.adoc#_header-allow-deny-policy[Header Allow/Deny]
 .. link:user-guide/gateway/policies.adoc#_http_security_policy[HTTP Security]
 .. link:user-guide/gateway/policies.adoc#_ignored_resources_policy[Ignored Resources]
 .. link:user-guide/gateway/policies.adoc#_ip_blacklist_policy[IP Blacklist]
