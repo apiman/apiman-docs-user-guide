@@ -95,7 +95,8 @@ The reason is that an Authentication policy is responsible for extracting the au
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
    "rules" : [
    	{
@@ -112,7 +113,7 @@ The reason is that an Authentication policy is responsible for extracting the au
    "multiMatch": true,
    "requestUnmatched": false
 }
-```
+----
 
 == BASIC Authentication Policy
 [[policy-basic-auth]]
@@ -161,7 +162,8 @@ Additionally, one of the following complex properties must be included in the co
 
 Here is an example of the JSON configuration you might use when configuring a BASIC Authentication policy that uses LDAP to validate the inbound credentials:
 
-```json
+[source,json]
+----
 {
    "realm" : "Example",
    "forwardIdentityHttpHeader" : "X-Identity",
@@ -176,13 +178,14 @@ Here is an example of the JSON configuration you might use when configuring a BA
       "rolenameAttribute" : "objectGUID"
    }
 }
-```
+----
 
 === Sample Configuration (JDBC)
 
 Here is an example of the JSON configuration you might use when configuring a BASIC Authentication policy that uses JDBC to validate the inbound credentials:
 
-```json
+[source,json]
+----
 {
    "realm" : "Example",
    "forwardIdentityHttpHeader" : "X-Identity",
@@ -199,7 +202,7 @@ Here is an example of the JSON configuration you might use when configuring a BA
       "roleQuery" : "SELECT r.rolename FROM roles r WHERE r.user = ?"
    }
 }
-```
+----
 
 == Caching Policy (Deprecated)
 [[policy-caching]]
@@ -235,7 +238,8 @@ The configuration parameters for an Caching Resources Policy are:
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
   "ttl" : 60,
   "cachingResourcesSettingsEntries" : [
@@ -244,7 +248,7 @@ The configuration parameters for an Caching Resources Policy are:
     { "httpMethod" : "*",    "pathPattern" : "/customers/.*/orders/bad_debts", "statusCode": "403" }
   ]
 }
-```
+----
 
 == CORS Policy
 [[policy-cors]]
@@ -258,13 +262,14 @@ For further references, see http://www.w3.org/TR/2014/REC-cors-20140116/[CORS W3
 
 === Plugin
 
-```json
+[source,json,subs=attributes+]
+----
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-cors-policy",
-    "version": "{{ book.apiman.version.release }}"
+    "version": "{apiman-version-release}"
 }
-```
+----
 
 === Configuration
 
@@ -324,7 +329,8 @@ How long preflight request can be cached in delta seconds.
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
    "exposeHeaders" : [
       "X-REQUESTS-REMAINING"
@@ -343,7 +349,7 @@ How long preflight request can be cached in delta seconds.
       "X-CUSTOM-HEADER"
    ]
 }
-```
+----
 
 == Header Allow/Deny
 [[policy-header-allow-deny]]
@@ -390,13 +396,14 @@ Security-related HTTP headers can be set, such as HSTS, CSP and XSS protection.
 
 === Plugin
 
-```json
+[source,json,subs=attributes+]
+----
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-http-security-policy",
-    "version": "{{ book.apiman.version.release }}"
+    "version": "{apiman-version-release}"
 }
-```
+----
 
 === Configuration
 
@@ -505,7 +512,8 @@ A valid CSP definition to apply
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
    "contentSecurityPolicy" : {
       "mode" : "REPORT_ONLY",
@@ -521,7 +529,7 @@ A valid CSP definition to apply
    },
    "xssProtection" : "ON"
 }
-```
+----
 
 == Ignored Resources Policy
 [[policy-ignored-resources]]
@@ -578,7 +586,8 @@ The configuration parameters for an Ignored Resources Policy are:
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
   "rules" : [
     { "verb" : "GET",  "pathPattern" : "/customers" },
@@ -586,7 +595,7 @@ The configuration parameters for an Ignored Resources Policy are:
     { "verb" : "*",    "pathPattern" : "/customers/.*/orders/bad_debts"}
   ]
 }
-```
+----
 
 == IP Blacklist Policy
 [[policy-ip-blacklist]]
@@ -612,13 +621,14 @@ The configuration parameters for an IP Blacklist Policy are:
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
   "ipList" : ["192.168.7.*"],
   "responseCode" : 500,
   "httpHeader" : "X-Forwarded-For"
 }
-```
+----
 
 == IP Whitelist Policy
 [[policy-ip-whitelist]]
@@ -648,13 +658,14 @@ The configuration parameters for an IP Whitelist Policy are:
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
   "ipList" : ["192.168.3.*", "192.168.4.*"],
   "responseCode" : 403,
   "httpHeader" : "X-Forwarded-For"
 }
-```
+----
 
 == JSONP Policy
 [[policy-jsonp]]
@@ -664,35 +675,38 @@ The configuration parameters for an IP Whitelist Policy are:
 This policy turns a standard REST endpoint into a https://en.wikipedia.org/wiki/JSONP[JSONP] compatible endpoint.
 For example, a REST endpoint may typically return the following JSON data:
 
-```json
+[source,json]
+----
 {
   "foo" : "bar",
   "baz" : 17
 }
-```
+----
 
 If the JSONP policy is applied to this API, then the caller must provide a JSONP callback function name via the URL (for details on this, see the *Configuration* section below).
 When this is done, the API might respond with this instead:
 
-```json
+[source,json]
+----
 callbackFunction({
   "foo" : "bar",
   "baz" : 17
 })
-```
+----
 
 TIP: If the API client does not send the JSONP callback function name in the URL (via the configured query parameter name), this policy will do nothing.
 This allows managed endpoints to support both standard REST *and* JSONP at the same time.
 
 === Plugin
 
-```json
+[source,json,subs=attributes+]
+----
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-jsonp-policy",
-    "version": "{{ book.apiman.version.release }}"
+    "version": "{apiman-version-release}"
 }
-```
+----
 
 === Configuration
 
@@ -702,29 +716,32 @@ The JSONP policy has a single configuration property, which can be used to speci
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
    "callbackParamName" : "callback"
 }
-```
+----
 
 If the above configuration were to be used, the API client (caller) must send the JSONP callback function name in the URL of the request as a query parameter named *callback*.
 For example:
 
-```
+[source]
+----
 GET /path/to/resource?callback=myCallbackFunction HTTP/1.1
 Host: www.example.org
 Accept: application/json
-```
+----
 
 In this example, the response might look like this:
 
-```json
+[source,json]
+----
 myCallbackFunction({
   "property1" : "value1",
   "property2" : "value2"
 })
-```
+----
 
 == JWT Policy
 [[policy-jwt]]
@@ -736,13 +753,14 @@ You can also require claims and strip them to forward them as header to the back
 
 === Plugin
 
-```json
+[source,json,subs=attributes+]
+----
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-jwt-policy",
-    "version": "{{ book.apiman.version.release }}"
+    "version": "{apiman-version-release}"
 }
-```
+----
 
 === Configuration
 
@@ -870,7 +888,8 @@ The token field name.
 
 ==== Example 1 (Signing Key)
 
-```json
+[source,json]
+----
 {
   "requireJWT": true,
   "requireSigned": false,
@@ -891,11 +910,12 @@ The token field name.
     }
   ]
 }
-```
+----
 
 ==== Example 2 (JWK(S))
 
-```json
+[source,json]
+----
 {
   "requireJWT": true,
   "requireSigned": true,
@@ -911,7 +931,7 @@ The token field name.
     }
   ]
 }
-```
+----
 
 == Keycloak OAuth Policy
 [[policy-keycloak-oauth]]
@@ -927,13 +947,14 @@ In general, this is one of the best approaches for achieving security without gr
 
 === Plugin
 
-```json
+[source,json,subs=attributes+]
+----
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-keycloak-oauth-policy",
-    "version": "{{ book.apiman.version.release }}"
+    "version": "{apiman-version-release}"
 }
-```
+----
 
 === Configuration
 
@@ -1063,7 +1084,8 @@ The token field name.
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
   "requireOauth": true,
   "requireTransportSecurity": true,
@@ -1086,7 +1108,7 @@ The token field name.
     }
   ]
 }
-```
+----
 
 == Log Policy
 [[policy-log]]
@@ -1098,13 +1120,14 @@ Useful to analyse inbound HTTP traffic to the gateway when added as the first po
 
 === Plugin
 
-```json
+[source,json,subs=attributes+]
+----
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-log-policy",
-    "version": "{{ book.apiman.version.release }}"
+    "version": "{apiman-version-release}"
 }
-```
+----
 
 === Configuration
 
@@ -1115,11 +1138,12 @@ When configuring this policy via the apiman REST API, there is only property:
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
    "direction" : "both"
 }
-```
+----
 
 == Quota Policy
 [[policy-quota]]
@@ -1150,7 +1174,8 @@ The configuration parameters for a Quota Policy are:
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
   "limit" : 100000,
   "granularity" : "Client",
@@ -1159,7 +1184,7 @@ The configuration parameters for a Quota Policy are:
   "headerRemaining" : "X-Quota-Limit-Remaining",
   "headerReset" : "X-Quota-Limit-Reset"
 }
-```
+----
 
 == Rate Limiting Policy
 [[policy-rate-limiting]]
@@ -1194,7 +1219,8 @@ The configuration parameters for a Rate Limiting Policy are:
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
   "limit" : 100,
   "granularity" : "Api",
@@ -1203,7 +1229,7 @@ The configuration parameters for a Rate Limiting Policy are:
   "headerRemaining" : "X-Limit-Remaining",
   "headerReset" : "X-Limit-Reset"
 }
-```
+----
 
 == Simple Header Policy
 [[policy-simple-header]]
@@ -1216,13 +1242,14 @@ Headers can be removed by simple string equality or regular expression.
 
 === Plugin
 
-```json
+[source,json,subs=attributes+]
+----
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-simple-header-policy",
-    "version": "{{ book.apiman.version.release }}"
+    "version": "{apiman-version-release}"
 }
-```
+----
 
 === Configuration
 
@@ -1331,7 +1358,8 @@ String to match or compile into a regex, depending on the value of `with`.
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
   "addHeaders": [
     {
@@ -1376,7 +1404,7 @@ String to match or compile into a regex, depending on the value of `with`.
     }
   ]
 }
-```
+----
 
 == SOAP Authorization Policy
 [[policy-soap-authorization]]
@@ -1388,13 +1416,14 @@ Please note that this policy will only accept a single SOAPAction header, and wi
 
 === Plugin
 
-```json
+[source,json,subs=attributes+]
+----
 {
 	"groupId": "io.apiman.plugins",
 	"artifactId": "apiman-plugins-soap-authorization-policy",
-	"version": "{{ book.apiman.version.release }}"
+	"version": "{apiman-version-release}"
 }
-```
+----
 
 === Configuration
 
@@ -1409,7 +1438,8 @@ Just as with the Authorization policy, you can define any number of rules you'd 
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
    "rules" : [
    	{
@@ -1424,7 +1454,7 @@ Just as with the Authorization policy, you can define any number of rules you'd 
    "multiMatch": true,
    "requestUnmatched": false
 }
-```
+----
 
 == Time Restricted Access Policy
 [[policy-time-restricted-access]]
@@ -1452,7 +1482,8 @@ TIP: If none of the configured rules matches the request resource path/destinati
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
     "rules": [
         {
@@ -1471,7 +1502,7 @@ TIP: If none of the configured rules matches the request resource path/destinati
         }
     ]
 }
-```
+----
 
 == Transfer Quota Policy
 [[policy-transfer-quota]]
@@ -1506,7 +1537,8 @@ The configuration parameters for a Quota Policy are:
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
   "direction" : "download",
   "limit" : 1024000,
@@ -1516,7 +1548,7 @@ The configuration parameters for a Quota Policy are:
   "headerRemaining" : "X-XferQuota-Limit-Remaining",
   "headerReset" : "X-XferQuota-Limit-Reset"
 }
-```
+----
 
 == Transformation Policy
 [[policy-transformation]]
@@ -1532,13 +1564,14 @@ For more control over the specifics of the format conversion, a custom policy ma
 
 === Plugin
 
-```json
+[source,json,subs=attributes+]
+----
 {
     "groupId": "io.apiman.plugins",
     "artifactId": "apiman-plugins-transformation-policy",
-    "version": "{{ book.apiman.version.release }}"
+    "version": "{apiman-version-release}"
 }
-```
+----
 
 === Configuration
 
@@ -1554,12 +1587,13 @@ From these two properties, the policy can decide how (and if) to convert the dat
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
    "clientFormat" : "JSON",
    "serverFormat" : "XML"
 }
-```
+----
 
 == URL Rewriting Policy
 [[policy-url-rewriting]]
@@ -1588,7 +1622,8 @@ This is done for performance reasons.
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
     "fromRegex" : "https?://[^\/]*\/([.\/]*)",
     "toReplacement" : "https://apiman.example.com/$1",
@@ -1596,7 +1631,7 @@ This is done for performance reasons.
     "processHeaders" : true
 
 }
-```
+----
 
 == URL Whitelist Policy
 [[policy-url-whitelist]]
@@ -1608,13 +1643,14 @@ It's particularly useful when only a small subset of resources from a back-end A
 
 === Plugin
 
-```json
+[source,json,subs=attributes+]
+----
 {
 	"groupId": "io.apiman.plugins",
 	"artifactId": "apiman-plugins-url-whitelist-policy",
-	"version": "{{ book.apiman.version.release }}"
+	"version": "{apiman-version-release}"
 }
-```
+----
 
 === Configuration
 
@@ -1634,7 +1670,8 @@ Configuration of the URL Whitelist Policy consists of a property to control the 
 
 === Sample Configuration
 
-```json
+[source,json]
+----
 {
     "removePathPrefix" : true,
     "whitelist" : [
@@ -1652,4 +1689,4 @@ Configuration of the URL Whitelist Policy consists of a property to control the 
         }
     ]
 }
-```
+----
