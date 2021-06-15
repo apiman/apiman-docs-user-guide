@@ -1,3 +1,5 @@
+* xref:crash-course/Guide.adoc[Crash Course]
+
 * Gateway
 ** xref:gateway/concepts.adoc[Concepts]
 ** xref:gateway/policies.adoc[Policy Types]
