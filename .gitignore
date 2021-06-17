@@ -15,3 +15,7 @@ npm-debug.log
 .metadata/*
 node_modules/
 _book/
+release.properties
+.project
+.settings
+*.iml

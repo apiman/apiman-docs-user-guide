@@ -1,0 +1,111 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.apiman</groupId>
+  <artifactId>apiman-guides</artifactId>
+  <version>1.2.9.Final</version>
+  <packaging>pom</packaging>
+
+  <name>User and Developer guides for apiman</name>
+  <description>This project contains user and developer guides for apiman.</description>
+  <url>http://apiman.io/</url>
+  <inceptionYear>2014</inceptionYear>
+
+  <organization>
+    <name>JBoss, a division of Red Hat</name>
+    <url>http://www.jboss.org</url>
+  </organization>
+
+  <licenses>
+    <license>
+      <name>Apache License Version 2.0</name>
+      <url>http://repository.jboss.org/licenses/apache-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <issueManagement>
+    <system>jira</system>
+    <url>https://issues.jboss.org/browse/APIMAN</url>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:git:git@github.com:apiman/apiman-guides.git</connection>
+    <developerConnection>scm:git:git@github.com:apiman/apiman-guides.git</developerConnection>
+    <url>scm:git:git@github.com:apiman/apiman-guides.git</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>Eric Wittmann</name>
+      <id>ewittman</id>
+      <email>eric.wittmann@redhat.com</email>
+      <organization>Red Hat</organization>
+      <roles>
+        <role>Tech Lead</role>
+        <role>Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Marc Savy</name>
+      <id>msavy</id>
+      <email>msavy@redhat.com</email>
+      <organization>Red Hat</organization>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+
+  <properties>
+    <!-- Instruct the build to use only UTF-8 encoding for source code -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+  </properties>
+
+  <modules>
+    <module>crash-course</module>
+    <module>user-guide</module>
+    <module>developer-guide</module>
+    <module>installation-guide</module>
+    <module>production-guide</module>
+  </modules>
+
+  <repositories>
+    <repository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Repository Group</name>
+      <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
+  
+  <pluginRepositories>
+    <pluginRepository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Repository Group</name>
+      <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
+</project>
+
