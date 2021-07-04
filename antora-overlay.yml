@@ -1,4 +1,7 @@
 #! For use with YTT. Overlays onto antora.yml. 
+#! Run like ./ytt -f antora.yml -f antora-overlay.yml -f project.yaml 
+#! project.yaml is Apiman project data like https://github.com/apiman/apiman/blob/master/.github/project.yaml
+
 #@ load("@ytt:data", "data")
 #@ load("@ytt:overlay", "overlay")
 #@overlay/match by=overlay.all
