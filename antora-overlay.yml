@@ -1,0 +1,11 @@
+#! For use with YTT. Overlays onto antora.yml. 
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+#@overlay/match by=overlay.all
+
+---
+asciidoc:
+  attributes:
+    #@overlay/match missing_ok=True
+    apiman-version-release: #@ getattr(data.values, "release-version")
+    apiman-snapshot-release: #@ getattr(data.values, "snapshot-version")
