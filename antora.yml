@@ -1,9 +1,9 @@
 name: user-guide
 title: Apiman User Guide
-version: latest
+version: 2.1.0.Final
 start_page: ROOT:index.adoc
 nav:
   - modules/ROOT/nav.adoc
 asciidoc:
   attributes:
-    apiman-version-release: 2.0.0.Final
+    apiman-version-release: 2.1.0.Final
