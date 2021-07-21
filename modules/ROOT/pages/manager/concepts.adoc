@@ -329,7 +329,7 @@ If you have marked an API as "Public", then consuming it is a simple matter of s
 appropriate API Gateway endpoint.  The managed API endpoint may vary depending on the Gateway being
 used, but it typically of the following form:
 
-* http://gatewayhost:port/apiman-gateway/{organizationId}/{apiId}/{version}/
+* http://gatewayhost:port/apiman-gateway/\{organizationId}/\{apiId}/\{version}/
 
 Simply send requests to the managed API endpoint, and do not include an API Key.
 

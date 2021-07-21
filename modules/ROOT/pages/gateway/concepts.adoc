@@ -33,9 +33,9 @@ A managed API can be invoked as though the back-end API were being invoked direc
 The specific endpoint to use in order to invoke a particular API can be different based on the Gateway implementation.
 However, typically the endpoint format is:
 
-* http://gatewayhost:port/apiman-gateway/{organizationId}/{apiId}/{version}/
+* http://gatewayhost:port/apiman-gateway/\{organizationId}/\{apiId}/\{version}/
 
-Note that all path segments beyond the {version} segment will be proxied on to the back-end API endpoint.
+Note that all path segments beyond the \{version} segment will be proxied on to the back-end API endpoint.
 Additionally, all HTTP headers and all query parameters (except for the API Key) will also be proxied to the back-end API.
 
 Requests to managed endpoints may include the API Key so that the Gateway knows which Client App is being used to invoke the API.
