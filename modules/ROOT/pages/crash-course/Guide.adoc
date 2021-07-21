@@ -2,7 +2,7 @@
 :homepage: http://apiman.io/
 :doctype: book
 
-A Crash Course in API Management with JBoss apiman
+A Crash Course in API Management with Apiman
 
 == Introduction
 Welcome to the crash course in JBoss apiman! The goal of this crash course is to provide a short and easy to consume introduction to API Management with apiman. This crash course will explain how apiman works and will walk you through a hands-on session to demonstrate how to use it. This crash course also provides links to the extensive on-line apiman user documentation, demos and quickstarts, and other resources.
@@ -237,7 +237,7 @@ Publishing an API as Public API - Public APIs can be directly accessed by any cl
 
 [source]
 ----
-http://gatewayhostname:port/apiman-gateway/{organizationId}/{API ID}/{API version}/
+http://gatewayhostname:port/apiman-gateway/\{organizationId}/\{API ID}/\{API version}/
 ----
 
 Public APIs are also very flexible in that they can be updated without being re-published. Unlike APIs published through Plans, Public APS can be accessed by a client app without requiring API consumers to agree to any terms and conditions related to a contract defined in a plan for the API.  It is also important to note that when an API is Public, only the policies configured on the API itself will be applied by the API Gateway.
@@ -320,7 +320,7 @@ From a client app's perspective, the only difference between accessing a managed
 
 [source]
 ----
-http://gatewayhostname:port/apiman-gateway/{organizationId}/{API ID}/{API version}/
+http://gatewayhostname:port/apiman-gateway/\{organizationId}/\{API ID}/\{API version}/
 ----
 
 In addition, if the API is not Public, then the managed API endpoint must include a Client App's API Key, either as a query parameter in the URL or as an HTTP header.  For example:
