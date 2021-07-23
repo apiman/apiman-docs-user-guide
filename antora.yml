@@ -7,3 +7,4 @@ nav:
 asciidoc:
   attributes:
     apiman-version-release: 2.1.0.Final
+    wildfly-version: 20.0.1.Final

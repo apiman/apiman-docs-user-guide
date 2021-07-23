@@ -1,8 +1,8 @@
 = Apiman Policies
 
-The most important runtime concept in apiman is the policy.
+The most important runtime concept in Apiman is the policy.
 Policies are configured in the API Manager and then applied at runtime by the API Gateway.
-This section of the guide provides more information about each of the policies available in apiman, what they do, and how they can be configured.
+This section of the guide provides more information about each of the policies available in Apiman, what they do, and how they can be configured.
 
 == Policy Types
 
@@ -30,7 +30,7 @@ Apiman supports these types of security policies:
 
 === Limiting Policies
 
-Some apiman policies provide an all-or-nothing level of control over access to managed APIs.
+Some Apiman policies provide an all-or-nothing level of control over access to managed APIs.
 For example, IP Blacklist or Whitelist policies either block or enable all access to a managed API, based on the IP address of the client.
 Rate limiting and quota policies provide you with more flexible ways to govern access to managed APIs.
 With rate limiting and quota policies, you can place limits on either the number of requests an API will accept over a specified period of time, or the total number of of bytes in the API requests.
@@ -43,9 +43,9 @@ The API may only receive a request a few hundreds of times a day, but each reque
 Let's say that we want to limit the amount of data transferred to 6GB per hour. For this type of API, we could set a rate limiting policy to allow for one request per minute, and then augment that policy with a transfer quota policy of 100Mb per hour.
 
 Each of these policies, if used singly, can be effective in throttling requests.
-apiman, however, adds an additional layer of flexibility to your use of these policy types by enabling you to use them in combinations.
+Apiman, however, adds a layer of flexibility to your use of these policy types by enabling you to use them in combinations.
 
-apiman supports these types of limiting policies:
+Apiman supports these types of limiting policies:
 
 * Quota Policy
 * Rate Limiting Policy
@@ -83,7 +83,7 @@ TIP: This is a built-in policy and therefore no plugins need to be installed pri
 The configuration of this policy consists of a number of rules that are applied to any inbound request to the API.
 Each rule consists of a regular expression pattern, an HTTP verb, and the role that an authenticated user must possess in order for access to be granted.
 
-TIP: It's *very* important to note that this policy must be configured *after* one of the standard apiman authentication policies (e.g. the BASIC Authentication policy or the Keycloak OAuth Policy).
+TIP: It's *very* important to note that this policy must be configured *after* one of the standard Apiman authentication policies (e.g. the BASIC Authentication policy or the Keycloak OAuth Policy).
 The reason is that an Authentication policy is responsible for extracting the authenticated user's roles, which is data that is required for the Authorization Policy to do its work.
 
 * *rules* (array) : Array of rules - each rule is applied only if it matches the current request.
@@ -135,7 +135,7 @@ There are several top level configuration properties:
 * *requireTransportSecurity* (boolean) : set to true if this policy should fail when receiving a message over an unsecured communication channel (in other words, enabling this will require clients to use *https*)
 * *requireBasicAuth* (boolean) : set to true if BASIC authentication credentials are *required* (set to false if alternative authentication mechanisms, such as OAuth, are also supported)
 
-Additionally, one of the following complex properties must be included in the configuration, indicating whether apiman should use JDBC, LDAP, or Static (not recommended for production) information as the source of identity used to validate provided user credentials.
+Additionally, one of the following complex properties must be included in the configuration, indicating whether Apiman should use JDBC, LDAP, or Static (not recommended for production) information as the source of identity used to validate provided user credentials.
 
 * *jdbcIdentity* (object) : included when you wish to use JDBC to connect to a database containing user and password information
 ** *type* (enum) : what type of JDBC connection to use - options are 'datasource', 'url'
@@ -255,7 +255,7 @@ The configuration parameters for an Caching Resources Policy are:
 
 === Description
 
-A policy implementing CORS (Cross-origin resource sharing): a method of defining access to resources outside of the originating domain.
+A policy implementing CORS (Cross-origin resource sharing): a method of defining access to resources outside the originating domain.
 It is principally a security mechanism to prevent the loading of resources from unexpected domains, for instance via XSS injection attacks.
 
 For further references, see http://www.w3.org/TR/2014/REC-cors-20140116/[CORS W3C Recommendation 16 January 2014] and https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Access-Control-Allow-Origin[MDN's articles].
@@ -538,9 +538,9 @@ A valid CSP definition to apply
 
 The ignored resources policy type enables you to shield some of an API's resources from being accessed, without blocking access to all the API's resources.
 Requests made to access to API resources designated as “ignored” result in an HTTP 404 (“not found”) error code.
-By defining ignored resource policies, apiman enables you to have fine-grained control over which of an API's resources are accessible.
+By defining ignored resource policies, Apiman enables you to have fine-grained control over which of an API's resources are accessible.
 
-For example, let's say that you have an apiman managed API that provides information to remote staff.
+For example, let's say that you have an Apiman managed API that provides information to remote staff.
 The REST resources provided by this API are structured as follows:
 
 /customers
@@ -560,7 +560,7 @@ To illustrate, using the above examples:
 | /customers/.*/orders/bad_debts | Denies access to all customer bad debt order information
 |====================
 
-What happens when the policy is applied to an API request is that the apiman Gateway matches the configured paths to the requested API resources.
+What happens when the policy is applied to an API request is that the Apiman Gateway matches the configured paths to the requested API resources.
 If any of the exclusion paths match, the policy triggers a failure with an HTTP return code of 404.
 
 The IP-related policy types are less fine-grained in that they allow or block access to all of an API's resources based on the IP address of the client application. We'll look at these policy types next.
@@ -603,8 +603,8 @@ The configuration parameters for an Ignored Resources Policy are:
 === Description
 
 As its name indicates, the IP blacklist policy type blocks access to an API's resources based on the IP address of the client application.
-The apiman Management UI form used to create an IP blacklist policy enables you to use wildcard characters in specifying the IP addresses to be blocked.
-In addition, apiman gives you the option of specifying the return error code sent in the response to the client if a request is denied.
+The Apiman Management UI form used to create an IP blacklist policy enables you to use wildcard characters in specifying the IP addresses to be blocked.
+In addition, Apiman gives you the option of specifying the return error code sent in the response to the client if a request is denied.
 Note that an IP Blacklist policy in a plan overrides an IP Whitelist policy.
 
 TIP: This is a built-in policy and therefore no plugins need to be installed prior to using it.
@@ -617,7 +617,7 @@ The configuration parameters for an IP Blacklist Policy are:
 ** 500 - Server error
 ** 404 - Not found
 ** 403 - Authentication failure
-* *httpHeader* (string) [optional] : Tells apiman to use the IP address found in the given HTTP request header *instead* of the one associated with the incoming TCP socket.  Useful when going through a proxy, often the value of this is 'X-Forwarded-For'.
+* *httpHeader* (string) [optional] : Tells Apiman to use the IP address found in the given HTTP request header *instead* of the one associated with the incoming TCP socket.  Useful when going through a proxy, often the value of this is 'X-Forwarded-For'.
 
 === Sample Configuration
 
@@ -654,7 +654,7 @@ The configuration parameters for an IP Whitelist Policy are:
 ** 500 - Server error
 ** 404 - Not found
 ** 403 - Authentication failure
-* *httpHeader* (string) [optional] : Tells apiman to use the IP address found in the given HTTP request header *instead* of the one associated with the incoming TCP socket.  Useful when going through a proxy, often the value of this is 'X-Forwarded-For'.
+* *httpHeader* (string) [optional] : Tells Apiman to use the IP address found in the given HTTP request header *instead* of the one associated with the incoming TCP socket.  Useful when going through a proxy, often the value of this is 'X-Forwarded-For'.
 
 === Sample Configuration
 
@@ -686,7 +686,7 @@ For example, a REST endpoint may typically return the following JSON data:
 If the JSONP policy is applied to this API, then the caller must provide a JSONP callback function name via the URL (for details on this, see the *Configuration* section below).
 When this is done, the API might respond with this instead:
 
-[source,json]
+[source,js]
 ----
 callbackFunction({
   "foo" : "bar",
@@ -726,7 +726,7 @@ The JSONP policy has a single configuration property, which can be used to speci
 If the above configuration were to be used, the API client (caller) must send the JSONP callback function name in the URL of the request as a query parameter named *callback*.
 For example:
 
-[source]
+[source,text]
 ----
 GET /path/to/resource?callback=myCallbackFunction HTTP/1.1
 Host: www.example.org
@@ -735,7 +735,7 @@ Accept: application/json
 
 In this example, the response might look like this:
 
-[source,json]
+[source,js]
 ----
 myCallbackFunction({
   "property1" : "value1",
@@ -818,8 +818,8 @@ Maximum allowed clock skew in seconds when validating exp (expiry) and nbf (not 
 | 0
 
 | requiredClaims
-| <<items>>[]
-a| *Required Claimss*
+| <<_items>>[]
+a| *Required Claims*
 Set whether to forward roles to an authorization policy.
 | None
 
@@ -831,10 +831,11 @@ Set auth information from the token into header(s).
 
 |===
 
+[#_items]
 ==== items
 
 .Require standard claims, custom claims and ID token fields (case sensitive).
-[cols="2,1,4,1", options="header"]
+[cols="2,1,4,1",options="header"]
 |===
 
 | Option
@@ -940,7 +941,7 @@ The token field name.
 
 A http://www.keycloak.org[Keycloak]-specific OAuth2 policy to regulate access to APIs.
 This plugin enables a wide range of sophisticated auth facilities in combination with, for instance, Keycloak's federation, brokering and user management capabilities.
-An exploration of the basics can be found http://www.apiman.io/blog/gateway/security/oauth2/keycloak/authentication/authorization/1.2.x/2016/01/22/keycloak-oauth2-redux.html[in our blog], but we encourage users to explore the http://keycloak.jboss.org/docs.html[project documentation], as there is a tremendous depth and breadth of functionality, most of which work extremely well with apiman.
+An exploration of the basics can be found http://www.apiman.io/blog/gateway/security/oauth2/keycloak/authentication/authorization/1.2.x/2016/01/22/keycloak-oauth2-redux.html[in our blog], but we encourage users to explore the https://www.keycloak.org/documentation[project documentation], as there is a tremendous depth and breadth of functionality, most of which works extremely well with Apiman.
 
 Keycloak's token format and auth mechanism facilitate excellent performance characteristics, with users able to easily tune the setup to meet their security requirements.
 In general, this is one of the best approaches for achieving security without greatly impacting performance.
@@ -1132,7 +1133,7 @@ Useful to analyse inbound HTTP traffic to the gateway when added as the first po
 === Configuration
 
 The Log Policy can be configured to output the request headers, the response headers, or both.
-When configuring this policy via the apiman REST API, there is only property:
+When configuring this policy via the Apiman REST API, there is only property:
 
 * *direction* (enum) : Which direction you wish to log, options are: 'request', 'response', 'both'
 
@@ -1159,7 +1160,7 @@ TIP: This is a built-in policy and therefore no plugins need to be installed pri
 The configuration parameters for a Quota Policy are:
 
 * *limit* (integer) : This is the number of requests that must be received before the policy will trigger.
-* *granularity* (enum) : The apiman element for which the requests are counted. Valid values are:
+* *granularity* (enum) : The Apiman element for which the requests are counted. Valid values are:
 ** User
 ** Api
 ** Client
@@ -1168,9 +1169,9 @@ The configuration parameters for a Quota Policy are:
 ** Day
 ** Month
 ** Year
-* *headerLimit* (string) [optional] : HTTP response header that apiman will use to store the limit being applied.
-* *headerRemaining* (string) [optional] : HTTP response header that apiman will use to store how many requests remain before the limit is reached.
-* *headerReset* (string) [optional] : HTTP response header that apiman will use to store the number of seconds until the limit is reset.
+* *headerLimit* (string) [optional] : HTTP response header that Apiman will use to store the limit being applied.
+* *headerRemaining* (string) [optional] : HTTP response header that Apiman will use to store how many requests remain before the limit is reached.
+* *headerReset* (string) [optional] : HTTP response header that Apiman will use to store the number of seconds until the limit is reset.
 
 === Sample Configuration
 
@@ -1202,7 +1203,7 @@ TIP: This is a built-in policy and therefore no plugins need to be installed pri
 The configuration parameters for a Rate Limiting Policy are:
 
 * *limit* (integer) : This is the number of requests that must be received before the policy will trigger. Maximum value is 9007199254740991 (2^53 - 1).
-* *granularity* (enum) : The apiman element for which the requests are counted. Valid values are:
+* *granularity* (enum) : The Apiman element for which the requests are counted. Valid values are:
 ** User
 ** Api
 ** Client
@@ -1213,9 +1214,9 @@ The configuration parameters for a Rate Limiting Policy are:
 ** Day
 ** Month
 ** Year
-* *headerLimit* (string) [optional] : HTTP response header that apiman will use to store the limit being applied.
-* *headerRemaining* (string) [optional] : HTTP response header that apiman will use to store how many requests remain before the limit is reached.
-* *headerReset* (string) [optional] : HTTP response header that apiman will use to store the number of seconds until the limit is reset.
+* *headerLimit* (string) [optional] : HTTP response header that Apiman will use to store the limit being applied.
+* *headerRemaining* (string) [optional] : HTTP response header that Apiman will use to store how many requests remain before the limit is reached.
+* *headerReset* (string) [optional] : HTTP response header that Apiman will use to store the number of seconds until the limit is reset.
 
 === Sample Configuration
 
@@ -1522,7 +1523,7 @@ The configuration parameters for a Quota Policy are:
 ** download
 ** both
 * *limit* (integer) : This is the number of requests that must be received before the policy will trigger.
-* *granularity* (enum) : The apiman element for which the transmitted bytes are counted. Valid values are:
+* *granularity* (enum) : The Apiman element for which the transmitted bytes are counted. Valid values are:
 ** User
 ** Api
 ** Client
@@ -1531,9 +1532,9 @@ The configuration parameters for a Quota Policy are:
 ** Day
 ** Month
 ** Year
-* *headerLimit* (string) [optional] : HTTP response header that apiman will use to store the limit being applied.
-* *headerRemaining* (string) [optional] : HTTP response header that apiman will use to store how many requests remain before the limit is reached.
-* *headerReset* (string) [optional] : HTTP response header that apiman will use to store the number of seconds until the limit is reset.
+* *headerLimit* (string) [optional] : HTTP response header that Apiman will use to store the limit being applied.
+* *headerRemaining* (string) [optional] : HTTP response header that Apiman will use to store how many requests remain before the limit is reached.
+* *headerReset* (string) [optional] : HTTP response header that Apiman will use to store the number of seconds until the limit is reset.
 
 === Sample Configuration
 
@@ -1601,7 +1602,7 @@ From these two properties, the policy can decide how (and if) to convert the dat
 === Description
 
 This policy is used to re-write responses from the back-end API such that they will be modified by fixing up any incorrect URLs found with modified ones.
-This is useful because apiman works through an API Gateway, and in some cases an API might return URLs to followup action or data endpoints.
+This is useful because Apiman works through an API Gateway, and in some cases an API might return URLs to followup action or data endpoints.
 In these cases the back-end API will likely be configured to return a URL pointing to the unmanaged API endpoint.
 This policy can fix up those URL references so that they point to the managed API endpoint (the API Gateway endpoint) instead.
 

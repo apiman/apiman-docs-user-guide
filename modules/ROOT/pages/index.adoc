@@ -17,7 +17,7 @@ API Management is a technology that addresses these and other issues by providin
 APIs and configure governance policies, as well as an API Gateway that sits between the API and the client.
 This API Gateway is responsible for applying the policies configured during management.
 
-Therefore an API management system tends to provide the following features:
+Therefore, an API management system tends to provide the following features:
 
 * Centralized governance policy configuration
 * Tracking of APIs and consumers of those APIs
@@ -27,7 +27,7 @@ Therefore an API management system tends to provide the following features:
 
 == Project Goals
 
-The goals of the JBoss API management project are to provide an easy to use and powerful API Manager as well as a small, fast, low-overhead API Gateway to implement standard API management functionality.
+The goals of the JBoss API management project are to provide an easy-to-use and powerful API Manager as well as a small, fast, low-overhead API Gateway to implement standard API management functionality.
 
 == Typical Use Cases
 
@@ -41,7 +41,7 @@ Authentication can vary greatly both in the protocols used to authenticate and t
 It can often be convenient to provide authentication at the API management layer to free up the back end API from having to do this work.
 This approach also has the side benefit of centralizing configuration of authentication for a wide array of disparate APIs.
 
-Therefore the API management layer must provide authentication capabilities using a wide range of protocols including BASIC, digest, OAuth, etc.
+Therefore, the API management layer must provide authentication capabilities using a wide range of protocols including BASIC, digest, OAuth, etc.
 
 === Throttling/Rate Limiting
 
