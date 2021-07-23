@@ -2,7 +2,7 @@
 
 == API Manager
 There are two layers to the API management project. There is an API Manager which allows end users to
-centrally manage their APIs. Additionally there is an API Gateway which is responsible for applying those
+centrally manage their APIs. Additionally, there is an API Gateway which is responsible for applying those
 policies to API requests.
 
 The API Manager allows end-users to track, configure, and share APIs with other users. All of this is
@@ -217,9 +217,9 @@ API that the API Gateway will proxy to if all the policies are successfully appl
 'Implementation' tab to configure the API endpoint and API type details on your API.
 
 The 'Implementation' tab is primarily used to configure the details of the back-end API that
-apiman will proxy to at runtime.  You must configure the following:
+Apiman will proxy to at runtime.  You must configure the following:
 
-* *Endpoint URL* - The URL that apiman will use to proxy a request made for this API.
+* *Endpoint URL* - The URL that Apiman will use to proxy a request made for this API.
 * *Endpoint Type* - Currently either REST or SOAP (not presently used, future information)
 * *Endpoint Content Type* - Choose between JSON and XML, information primarily used to respond with a policy failure or error in the appropriate format.
 
@@ -230,11 +230,11 @@ that here.  We also support simple BASIC authentication between the gateway and 
 API.  Please note that BASIC authentication is not ideal, and especially insecure if not
 using SSL/HTTPS to connect to the back end API.
 
-If the apiman administrator has configured multiple Gateways (see the "System Administration / Gateways"
+If the Apiman administrator has configured multiple Gateways (see the "System Administration / Gateways"
 section below), then the 'Implementation' tab will also include an option that will let
 you choose which Gateway(s) to use when publishing.  You may select one or more Gateway
 in this case.  If you choose multiple Gateways, then when you click the 'Publish' button,
-apiman will publish the API to *all* of the selected Gateways.
+Apiman will publish the API to *all* the selected Gateways.
 
 TIP: If a single Gateway has been configured, then you don't have a choice, and so the UI
 will hide the Gateway selector entirely and simply pick the default Gateway for you.
@@ -299,13 +299,13 @@ The API Metrics page is a great way to figure out how often your API is used, an
 ways.
 
 ==== Importing API(s)
-As an alternative to manually creating and configuring an API, apiman also supports importing
+As an alternative to manually creating and configuring an API, Apiman also supports importing
 an API from a globally configured API Catalog.
 
-TIP: The API Catalog is configured by the apiman system administrator/installer.  See the
+TIP: The API Catalog is configured by the Apiman system administrator/installer.  See the
 installation guide for more information about how to configure a custom API Catalog.
 
-An API can be imported into apiman in one of two ways.  First, from the Organization's "APIs"
+An API can be imported into Apiman in one of two ways.  First, from the Organization's "APIs"
 tab you can click the down-arrow next to the "New API" button and choose the "Import API(s)"
 option.  This results in a wizard that will guide you through importing one or more API
 from the catalog into the Organization.  This wizard will allow you to search for, find, and

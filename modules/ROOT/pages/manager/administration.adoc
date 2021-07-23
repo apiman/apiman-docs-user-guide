@@ -1,5 +1,6 @@
 = System Administration
-There are several "global" settings that must be configured/managed by an apiman administrator.
+
+There are several "global" settings that must be configured/managed by an Apiman administrator.
 These global settings are managed by navigating to the *System Administration* section of the API Manager UI.
 
 == Roles
@@ -11,26 +12,26 @@ These roles each grant different specific privileges to the user.
 For example, a user with the *Client App Developer* role will be able to manage the organization's client apps but not its APIs or plans.
 
 The roles that are available when adding a member to an organization are managed in the *Roles* section of the *System Administration* UI.
-The apiman admin can create as many roles as she wishes, giving each one a name, description, and the set of permissions it grants.
+The Apiman admin can create as many roles as she wishes, giving each one a name, description, and the set of permissions it grants.
 Additionally, certain roles may be automatically granted to users who create new organizations.
 At least one such role must be present, otherwise organizations cannot be created.
 
 == Policy Definitions
 
-The policies available when configuring APIs, Plans, and Client Apps are controlled by the *Policy Definitions* known to apiman.
-These definitions are stored in the API Manager and are added by the apiman admin.
-Typically these are added once and rarely changed.
-But as new versions of apiman are released, additional policies will be made available.
+The policies available when configuring APIs, Plans, and Client Apps are controlled by the *Policy Definitions* known to Apiman.
+These definitions are stored in the API Manager and are added by the Apiman admin.
+Typically, these are added once and rarely changed.
+But as new versions of Apiman are released, additional policies will be made available.
 For each policy, a policy definition must be configured in the *System Administration* UI.
 
 Additionally, it is possible for a plugin, when installed, to contribute one or more policy definitions to the list.
-This is a very common way for new policy definitions to be added to apiman.
+This is a very common way for new policy definitions to be added to Apiman.
 
 == Gateways
 
 Apiman allows multiple logical Gateways to be configured.
 The Gateway is the server that actually applies the policies configured in the API Manager to live requests to managed APIs.
-When using apiman, at least one Gateway must be running and configured in the API Manager.
+When using Apiman, at least one Gateway must be running and configured in the API Manager.
 However, there is no limit to the total number of Gateways that may be running.
 The typical reason to have multiple Gateways is when some APIs are very high volume and others are not.
 In this case, the high volume APIs could be published to a Gateway that can handle such load, while the low volume APIs could be published to
@@ -39,7 +40,7 @@ another (perhaps cheaper) Gateway.
 Another reason you may want multiple Gateways if you need some of your APIs to be provided in a particular physical region and others in a different one.
 In this case, you may have a Gateway (perhaps clustered) running in a US data center, while another Gateway (different cluster) is running separately in a data center in Europe.
 
-In all cases, the apiman admin must configure these Gateways in the *System Administration* UI.
+In all cases, the Apiman admin must configure these Gateways in the *System Administration* UI.
 Each Gateway has a name, description, and configuration endpoint.
 The configuration endpoint is what the API Manager will use when publishing APIs and client apps into the Gateway.
 
@@ -57,8 +58,8 @@ The plugin management administration page allows an admin to install and uninsta
 === Adding Plugins
 
 The Plugin admin page has two tabs - one shows the list of plugins currently installed, and the other shows a list of "Available Plugins".
-The list of available plugins comes from a plugin registry that is configured when apiman is installed (see the Installation Guide for details on how to configure a custom plugin registry).
-By default, the "official" apiman plugins will show up in the list.
+The list of available plugins comes from a plugin registry that is configured when Apiman is installed (see the Installation Guide for details on how to configure a custom plugin registry).
+By default, the "official" Apiman plugins will show up in the list.
 
 A custom plugin is typically added by clicking on the 'Add Custom Plugin' button found on the "Available Plugins" tab.
 This allows you to install a plugin that is not found in the configured plugin registry.
@@ -72,17 +73,17 @@ All plugins are actually maven artifacts, and as such their coordinates consist 
 * Type (optional, defaults to 'war')
 
 When installing a plugin from the plugin registry, simply locate it in the list shown on the "Available Plugins" tab and then click the "Install" action.
-This will again take you to the Add Plugin page, but with all of the appropriate information already filled in.
+This will again take you to the Add Plugin page, but with all the appropriate information already filled in.
 At this point you should only need to click the "Add Plugin" button.
 
-Plugins primarily are used to contribute custom policies to apiman.
+Plugins primarily are used to contribute custom policies to Apiman.
 These policies are automatically discovered (if they exist in the plugin) when a plugin is added to the API Manager.
 Policies that have been contributed via a plugin will appear in the Policy Definitions admin page along with the built-in policies.
 
 === Uninstalling Plugins
 
 At any time you may choose to uninstall a plugin.
-Note that if the plugin was contributing one or more policies to apiman, then the policy will no longer be available for use when configuring your Plans, APIs, and Client Apps.
+Note that if the plugin was contributing one or more policies to Apiman, then the policy will no longer be available for use when configuring your Plans, APIs, and Client Apps.
 However, if the policy is already in use by one of these entities, it will continue to work.
 In other words, uninstalling a plugin only removes the policy for use by new entities, it does *not* break existing usages.
 
@@ -91,7 +92,7 @@ After confirming the action, the plugin should disappear from the list.
 
 === Upgrading Plugins
 
-If apiman determines that a plugin can be upgraded, then an "Upgrade Plugin" action button will show up for the plugin in the "Installed Plugins" tab.
+If Apiman determines that a plugin can be upgraded, then an "Upgrade Plugin" action button will show up for the plugin in the "Installed Plugins" tab.
 This action will be represented as an up arrow icon button.
 When clicked, you will be prompted for the version of the plugin you wish to upgrade *to*.
 The result will be that a new version of the plugin will be downloaded and installed, replacing the older version you had before.
@@ -107,8 +108,8 @@ This feature is useful for the following use-cases:
 
 * Backing up data
 * Migrating data between environments (e.g. Test->Production)
-* Upgrading between apiman versions
+* Upgrading between Apiman versions
 
-From the Export/Import UI page, simply click the "Export All" button if you wish to export all of the data in the API Manager.
-The result will be a downloaded JSON file containing all of your apiman data.  This file can then be optionally post-processed (perhaps you want to migrate only a single Organization from your Test environment to your Prod environment).
-At some later time, you can import this file (typically into a different installation of apiman) by selecting it and choosing "Upload File".
+From the Export/Import UI page, simply click the "Export All" button if you wish to export all the data in the API Manager.
+The result will be a downloaded JSON file containing all of your Apiman data.  This file can then be optionally post-processed (perhaps you want to migrate only a single Organization from your Test environment to your Prod environment).
+At some later time, you can import this file (typically into a different installation of Apiman) by selecting it and choosing "Upload File".
