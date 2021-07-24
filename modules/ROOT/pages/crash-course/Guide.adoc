@@ -1079,18 +1079,14 @@ And, if you note, in the process of doing all this, the only code that we had to
 
 == Section 7 - Apiman Resources
 
- * Apiman site - http://www.apiman.io/latest/
- * Apiman blog - http://www.apiman.io/blog/
- * Apiman downloads - http://www.apiman.io/latest/download.html
- * Apiman user guide - http://www.apiman.io/latest/user-guide.html
- * Apiman developer guide - http://www.apiman.io/latest/developer-guide.html
+ * Apiman site - https://www.apiman.io/
+ * Apiman blog - https://www.apiman.io/blog/
+ * Apiman downloads - https://www.apiman.io/latest/download.html
+ * Apiman user guide, installation guide, & developer guide - https://www.apiman.io/apiman-docs/
  * Apiman videos - https://vimeo.com/user34396826
- * Apiman on github - https://github.com/apiman
- * Apiman on JIRA - https://issues.jboss.org/projects/APIMAN
- * Apiman chat on IRC - http://www.apiman.io/latest/chat.html
+ * Apiman on GitHub - https://github.com/apiman/apiman
+ * Apiman issues - https://github.com/apiman/apiman/issues
  * Apiman on Twitter - https://twitter.com/apiman_io
- * Apiman mailing list -  https://lists.jboss.org/mailman/listinfo/apiman-user
- * Apiman contributors - http://www.apiman.io/latest/contributors.html
 
 
 :numbered!:
