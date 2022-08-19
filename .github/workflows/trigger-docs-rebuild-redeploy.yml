@@ -2,7 +2,7 @@ name: Trigger rebuild and redeployment of Apiman docs website
 
 on:
   push:
-    branches: [ antora ] # Put all branches we want to track docs for here.
+    branches: [ antora, 1.x, 2.x ] # Put all branches we want to track docs for here.
   workflow_dispatch:
 
 jobs:
