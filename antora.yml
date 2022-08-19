@@ -1,6 +1,7 @@
 name: user-guide
 title: User Guide
-version: 2.2.3.Final
+version: 3.0.0-SNAPSHOT
+prerelease: true
 start_page: ROOT:index.adoc
 nav:
   - modules/ROOT/nav.adoc
