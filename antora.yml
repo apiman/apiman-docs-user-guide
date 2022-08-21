@@ -7,5 +7,6 @@ nav:
   - modules/ROOT/nav.adoc
 asciidoc:
   attributes:
-    apiman-version-release: 2.2.3.Final
+    apiman-version-release: 3.0.0-SNAPSHOT
     wildfly-version: 23.0.2.Final
+    wildfly-version-major: 23
