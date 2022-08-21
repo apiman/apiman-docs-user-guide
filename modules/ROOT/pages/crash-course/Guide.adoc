@@ -1,17 +1,28 @@
 = Crash Course in Apiman {apiman-version-release}
 :homepage: http://apiman.io/
 :doctype: book
-:wf-admin-guide: https://docs.wildfly.org/20/Admin_Guide.html
+:wf-admin-guide: https://docs.wildfly.org/{wildfly-version-major}/Admin_Guide.html
 
 A Crash Course in API Management with Apiman
 
 == Introduction
-Welcome to the crash course in JBoss Apiman! The goal of this crash course is to provide a short and easy to consume introduction to API Management with Apiman. This crash course will explain how Apiman works and will walk you through a hands-on session to demonstrate how to use it. This crash course also provides links to the extensive on-line Apiman user documentation, demos and quickstarts, and other resources.
 
-This crash course is organized into the following sections:
+Welcome to the crash course in Apiman!
 
- * How Apiman Works - This section describes the data model Apiman uses, and how it uses the elements created in that data model to perform its tasks.
- * Policies: At the Core of API Management - In API Management, policies are where the action is. It's the policies that define the rules that Apiman uses to manage your APIs. Since policies are so important, this is the longest section of the crash course.
+The goal of this crash course is to provide a short and easy-to-consume introduction to API Management with Apiman.
+
+This crash course will explain how Apiman works and will walk you through a hands-on session to demonstrate how to use it.
+This course also provides links to the extensive online Apiman user documentation, demos and quickstarts, and other resources.
+
+This course is organized into the following sections:
+
+How Apiman Works::
+This section describes the data model Apiman uses, and how it uses the elements created in that data model to perform its tasks.
+
+Policies::
+At the Core of API Management - In API Management, policies are where the action is.
++
+It's the policies that define the rules that Apiman uses to manage your APIs. Since policies are so important, this is the longest section of the crash course.
 
 Each of the next four sections in the crash course describes how Apiman supports the four primary groups of Apiman users:
 
@@ -110,7 +121,7 @@ Apiman has support for many policies, including (but not limited to):
 
 | Policy Categories | Policies
 
-| Security Policies 
+| Security Policies
 a| * *BASIC Authentication* - A username/password is required to access an API.
 * *OAuth Authentication* - Uses Keycloak to provide OAuth authentication.
 * *Authorization* - Access to APIs’ resources is controlled by user roles.
