@@ -8,6 +8,7 @@ A policy implementing CORS (Cross-origin resource sharing): a method of defining
 It is principally a security mechanism to prevent the loading of resources from unexpected domains, for instance via XSS injection attacks.
 
 For further references, see:
+
 * {cors-w3c}[CORS W3C Recommendation 16 January 2014^]
 * {cors-mozilla}[MDN's CORS articles^].
 
