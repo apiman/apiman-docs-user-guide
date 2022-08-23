@@ -48,7 +48,8 @@ The API Key can be sent in one of the following ways:
 * As an HTTP Header named *X-API-Key*
 * As a URL query parameter named *apikey*
 
-If the API being invoked is a "Public" API, then no API Key should be sent.  However, the request should still be sent to the same endpoint as described above.
+If the API being invoked is a "Public" API, then no API Key should be sent.
+However, the request should still be sent to the same endpoint as described above.
 
 The endpoint itself contains enough information to let the Gateway know what API is being invoked.
 
