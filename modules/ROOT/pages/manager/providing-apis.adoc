@@ -74,7 +74,105 @@ If no plans are needed, you can instead mark the API as "Public", making it avai
 
 Although an API can be *both* Public and available through one or more plan, it is unusual to do so.
 
+You can set the <<_discoverability, discoverability>> of an attached API plan on this page, if you wish, which enables you to expose a specific API Plan outside your organization.
+
 TIP: After making any changes make sure to click the Save button.
+
+[#_discoverability]
+== Discoverability
+:discov-feedback-thread: https://github.com/apiman/apiman/discussions/2280
+:aep-4: https://github.com/orgs/apiman/discussions/1952
+
+[.MaintainerMessage]
+****
+The discoverability system is new in Apiman 3.
+You can read the design principals in our {aep-4}[Apiman Enhancement Proposal^].
+
+How can we improve this new mechanism?Are certain things not clear?Do you have suggestions?
+
+Please let us know your thoughts and feedback in this {discov-feedback-thread}[GitHub Discussion thread^].
+****
+
+Apiman's explicit permissions system provides fine-grained permissions for users who are a member of a given organisation.
+
+Discoverability is an **implicit read permissions system** that layers on top of the explicit permissions system that already exists in Apiman.
+It allows API Editors to **expose APIs to consumers who are not members of their organisation**.
+
+Moreover, discoverability system allows the segregation of different categories of 'non-members'.
+Consequently, this is also the mechanism by which APIs can explicitly be exposed into the Apiman Developer Portal for anonymous users to browse (although, they need an account to subscribe).
+
+=== Capabilities
+
+* API Publishers can selectively expose an API outside an organisation to non-members.
+
+* API Plans (i.e. Api Version + Plan Version) have a discoverability assigned to them.
+
+* Public API Versions can also have a discoverability.
+
+* API Publishers can choose different levels of discoverability (i.e. defines who can find a given API):
+** Organization Members only: only explicit members of the organization can see the API (existing explicit permissions system).
+
+** Full platform members: only 'full' Apiman platform users with `apiuser` role can see the API. This means an active account is required.
+
+** Expose in portal: expose the API in the developer portal for anonymous access, and for signed-in developer portal users (and all above).
+
+* Via configuration, Apiman can distinguish between different categories of non-member via their IDM roles; namely developer portal users (`devportaluser`) and 'full' Apiman platform users (`apiuser`).
+** This can be useful for certain segregation capabilities (e.g. not allowing developer portal users to access the main Apiman Manager UI).
+
+* No endpoints, including search, return items a user, whether anonymous or logged-in, does not have permission to see.
+
+* Fully backwards compatible, as existing APIs will simply have the default 'org members only' behaviour.
+
+=== Worked Example
+
+In this worked example, we assume the following:
+
+* Create an **organization** called `DemoOrg`, of which your user is the admin.
+* Create a **plan** called `gold` and lock it.
+* Create an **API version** called `ExampleApi` with version `1.0`. We'll refer to it as `ExampleApi/1.0` from now on.
+* In a private tab, we create a new Apiman user called `joe-bloggs` with standard permissions. Do not add this account to `DemoOrg`.
+
+First, we navigate to `ExampleApi's` *`plans`* tab and attach the *`gold`* plan.
+
+We can see the Apiman offers the following *discoverability* levels:
+
+//. Organization members only
+//. Full platform members
+//. Expose in portal
+
+.Organization members only
+====
+The default **organization members only**, means that only members of `DemoOrg` with the appropriate explicit permissions can see `ExampleApi/1.0`.
+
+Even using search or direct links, the `joe-bloggs` account will **not** be able to discover `ExampleApi/1.0`.
+This is because is not a member of `DemoOrg`.
+====
+
+.Full platform members
+====
+If we select **full platform members**, then even users outside of `DemoOrg` will be able to find `ExampleApi/1.0` and subscribe to it, as long as they have an Apiman account and the standard `apiuser` role.
+
+For example, our `joe-blogs` account can discover `ExampleApi/1.0` via searches or links, because he has a full Apiman account and the `apiuser` role.
+====
+
+.Expose in portal
+====
+If we select **expose in portal**, then:
+
+* Users with active accounts outside of `DemoOrg` will be able to find `ExampleApi/1.0` and subscribe to it.
+
+* Anonymous users will be able to find `ExampleApi/1.0`, even when not logged (but can't subscribe).
+
+* `ExampleApi/1.0` will appear in the Apiman Developer Portal.
+
+====
+
+[TIP]
+====
+Users whose accounts only have the `portaluser` role in Keycloak will only see APIs in their own organization, or those with the **expose in portal** flag.
+
+This may be useful to segregate different types of users on the platform.
+====
 
 == Managing Policies
 
