@@ -16,6 +16,15 @@ The Apiman admin can create as many roles as she wishes, giving each one a name,
 Additionally, certain roles may be automatically granted to users who create new organizations.
 At least one such role must be present, otherwise organizations cannot be created.
 
+== Discoverability
+
+Apiman's discoverability system is a type of implicit read permissions system that allows users who are not explicit members of an organization to find and subscribe APIs.
+It works hand-in-hand with Apiman's existing explicit permissions and roles system.
+
+It is analogous to GitHub's public repository concept, where it is possible to implicitly allow read-only permissions for a given repo outside your organization (including to anonymous users).
+
+Learn more in the xref:manager/providing-apis.adoc#_discoverability[Providing APIs: Discoverability] guide.
+
 == Policy Definitions
 
 The policies available when configuring APIs, Plans, and Client Apps are controlled by the *Policy Definitions* known to Apiman.
