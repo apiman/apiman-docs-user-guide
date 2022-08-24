@@ -88,7 +88,9 @@ TIP: After making any changes make sure to click the Save button.
 The discoverability system is new in Apiman 3.
 You can read the design principals in our {aep-4}[Apiman Enhancement Proposal^].
 
-How can we improve this new mechanism?Are certain things not clear?Do you have suggestions?
+How can we improve this new mechanism?
+Are certain things not clear?
+Do you have suggestions?
 
 Please let us know your thoughts and feedback in this {discov-feedback-thread}[GitHub Discussion thread^].
 ****
@@ -136,10 +138,6 @@ First, we navigate to `ExampleApi's` *`plans`* tab and attach the *`gold`* plan.
 
 We can see the Apiman offers the following *discoverability* levels:
 
-//. Organization members only
-//. Full platform members
-//. Expose in portal
-
 .Organization members only
 ====
 The default **organization members only**, means that only members of `DemoOrg` with the appropriate explicit permissions can see `ExampleApi/1.0`.
@@ -174,20 +172,59 @@ Users whose accounts only have the `portaluser` role in Keycloak will only see A
 This may be useful to segregate different types of users on the platform.
 ====
 
+== API Signup Approvals
+:api-approvals-feedback: https://github.com/apiman/apiman/discussions/2281
+
+[.MaintainerMessage]
+****
+The API signup approvals system is new in Apiman 3.
+
+How can we improve this new mechanism?
+Are certain things not clear?
+Do you have suggestions?
+
+Please let us know your thoughts and feedback in this {api-approvals-feedback}[GitHub Discussion thread^].
+****
+
+You can require that any API Consumer signing up to your API Plan (API Version + Plan Version) go through an explicit approvals process before their contract can be published onto the Apiman Gateway.
+
+Simply tick "requires approval" to activate the feature on a plan-by-plan basis, and any user signing up to your API Plan will need explicit approval from a user in your organization with the `planAdmin` permission.
+
+=== Workflow
+
+In order to facilitate the approval process, Apiman does the following:
+
+* Sends a notification to everyone in the organization with the `planAdmin` permission, alerting them that someone has signed up and required approval.
+
+** If you have enabled email notifications, then emails will be dispatched also, containing a broad range of useful information.
+
+** Both the in-browser and email notification contain links that allow an approver to click through into the appropriate page to approve or deny the request.
+
+* Management of approvals is done from the API's "contracts" tab, although you will typically be sent directly to the right place by a notification.
+
+* You can either:
+** Approve the request, and the user will be able to begin using the API immediately.
+** Reject the request, and insert a rejection message.
+A rejection will result in the pending contract being immediately deleted.
+
 == Managing Policies
 
 API policies can be added and configured by navigating to the 'Policies' tab on the API details page.
 
-The 'Policies' tab presents a list of all the policies configured for this API.
-To add another policy to the API click the 'Add Policy' button.
-On the resulting page choose the type of policy you wish to create and then configure the details for that policy.
-Once you have configured the details click the 'Add Policy' button to add the policy to the API.
+* The 'Policies' tab presents a list of all the policies configured for this API.
+
+* To add another policy to the API click the 'Add Policy' button.
+
+* On the resulting page choose the type of policy you wish to create and then configure the details for that policy.
+
+* Once you have configured the details click the 'Add Policy' button to add the policy to the API.
 
 == Publishing in the Gateway
 
 After all the configuration is complete for an API, it is time to publish the API to the runtime gateway.
 This can be done from any tab on the API details page by clicking  the *Publish* button in
 the top section of the UI.
+
 If successful, the status of the API will change to "Published" and the Publish button will disappear.
 
 [TIP]
