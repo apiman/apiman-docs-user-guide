@@ -5,7 +5,7 @@ From a client app's perspective, the only difference between accessing a managed
 
 [source,log]
 ----
-http://gatewayhostname:port/apiman-gateway/\{organizationId}/\{API ID}/\{API version}/
+http://gatewayhostname:port/apiman-gateway/{organizationId}/{API ID}/{API version}/
 ----
 
 In addition, if the API is not Public, then the managed API endpoint must include a Client App's API Key, either as a query parameter in the URL or as an HTTP header.  For example:

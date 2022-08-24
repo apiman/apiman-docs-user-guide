@@ -1,41 +1,10 @@
 = Getting Up and Running with Apiman
 
 In this section, we'll also take a very hands-on look at Apiman.
+
 In about 10 minutes, we'll get Apiman installed and running, define an API policy, create and publish an API, register an application, and watch Apiman enforce that policy.
 
-Let's start by installing the prerequisite software packages that we will need.
-
-== Prerequisite Software Required
-
-You can run Apiman on any operating system that supports Java 11+.
-
-We don't need very much in the way of prerequisite software to run Apiman out of the box.
-
-What you will need to install to run Apiman and follow all the steps in this chapter are:
-
-* Java: Apiman can run Java version 11 or newer. You will want to install the full Java JDK. You can use either OpenJDK or Oracle's JDK.
-
-* Apache Maven: While you do not need the Maven build tool to run Apiman, we will use it to build an example API.
-
-We don't need very much to run Apiman out of the box.
-
-You'll also need to install git and Maven installed to be able to build the example API.
-
-After you install the prerequisite software, the next thing to do is get a copy of Apiman.
-
-== Getting the Bits - Downloading Apiman
-
-To download Apiman, open a browser and navigate to http://www.apiman.io
-
-image::example/1.png[Apiman homepage]
-
-Apiman is distributed in multiple forms. We'll examine and use each of these forms in this book:
-
-* Docker Compose: In this distribution, Apiman is packaged as a series of Docker images pre-configured to make it easy to get started with almost zero effort.
-
-* Apiman WildFly: In this distribution, Apiman is packaged in a zip file that is installed over a WildFly server.
-
-=== Apiman Docker Compose distro
+== Apiman Docker Compose distro
 
 [.MaintainerMessage]
 ****
@@ -64,6 +33,38 @@ You will find a list of endpoints, including devportal and a mock mail server.
 
 * Don't forget to look at `.env` for a variety of useful settings.
 ====
+
+**If you use this approach, you can skip straight to xref:crash-course/how-apiman-works.adoc[].**
+
+== WildFly Bare Metal distro: prerequisites
+
+You can run Apiman on any operating system that supports Java 11+.
+
+We don't need very much in the way of prerequisite software to run Apiman out of the box.
+
+What you will need to install to run Apiman and follow all the steps in this chapter are:
+
+* Java: Apiman can run Java version 11 or newer. You will want to install the full Java JDK. You can use either OpenJDK or Oracle's JDK.
+
+* Apache Maven: While you do not need the Maven build tool to run Apiman, we will use it to build an example API.
+
+We don't need very much to run Apiman out of the box.
+
+You'll also need to install git and Maven installed to be able to build the example API.
+
+After you install the prerequisite software, the next thing to do is get a copy of Apiman.
+
+== Getting the Bits - Downloading Apiman
+
+To download Apiman, open a browser and navigate to http://www.apiman.io
+
+image::example/1.png[Apiman homepage]
+
+Apiman is distributed in multiple forms. We'll examine and use each of these forms in this book:
+
+* Docker Compose: In this distribution, Apiman is packaged as a series of Docker images pre-configured to make it easy to get started with almost zero effort.
+
+* Apiman WildFly: In this distribution, Apiman is packaged in a zip file that is installed over a WildFly server.
 
 === Apiman WildFly distribution
 
@@ -326,7 +327,7 @@ Also, the default database used by Apiman to store contract and API information 
 
 For a production server, you'd want to reconfigure this to use a production database. We'll cover Apiman server security and production configuration settings in later chapters.
 
-The Echo API “Quickstart”
+.Echo demonstration API
 
 The source code for the example service is contained in a git repo (http://git-scm.com) hosted at GitHub (https://github.com/apiman). To download a copy of the example service, navigate to the directory in which you want to build the service and execute this git command:
 
@@ -344,7 +345,7 @@ Receiving objects: 100% (104/104), 18.16 KiB, done.
 Resolving deltas: 100% (40/40), done.
 ----
 
-The source code for the example API is provided in the wildfly-{wildfly-version}/apiman/quickstarts directory. (In JBoss software, the term “quickstart” refers to an example program.)
+The source code for the example API is provided in the wildfly-{wildfly-version}/apiman/quickstarts directory.
 
 The echo-API quickstart includes these files:
 
@@ -379,9 +380,9 @@ And, after the download is complete, you'll see a populated directory tree that 
          	└── dist.xml
 ----
 
-As we mentioned earlier,  the example API is very simple. The only action that the API performs is to echo back in responses the meta data in the http://en.wikipedia.org/wiki/Representational_state_transfer[REST] requests that it receives.
+As we mentioned earlier,  the example API is very simple. The only action that the API performs is to echo back in responses the metadata in the http://en.wikipedia.org/wiki/Representational_state_transfer[REST^] requests that it receives.
 
-Maven is used to build the API. To build the API into a deployable .war file, navigate to the directory into which you downloaded the API example:
+Maven is used to build the API. To build the API into a deployable `.war` file, navigate to the directory into which you downloaded the API example:
 
 [source,bash]
 ----
@@ -712,7 +713,7 @@ So far so good. Now, send 10 more requests and you will see a response that look
 }
 ----
 
-And there it is. Your gold plan has been exceeded. Maybe next time you'll spend a little more and get the platinum plan!  ;-)
+And there it is. Your gold plan has been exceeded. Maybe next time you'll spend a little more and get the platinum plan 😅!
 
 Let's recap what we just accomplished in this demo:
 
