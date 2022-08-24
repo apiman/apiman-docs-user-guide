@@ -1,4 +1,4 @@
-== Apiman Resources
+= Apiman Resources
 
 * https://www.apiman.io/[Apiman website^]
 * https://www.apiman.io/blog/[Apiman blog^]
