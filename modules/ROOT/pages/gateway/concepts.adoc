@@ -74,3 +74,6 @@ The data can be accessed in a number of ways, including:
 * Through the API Manager UI
 * Through the API Manager REST API
 * Directly from the metrics system
+
+Some metrics implementations support capturing custom headers and query parameters.
+Refer to the Installation Guide for more.
