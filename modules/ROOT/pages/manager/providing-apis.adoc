@@ -1,0 +1,157 @@
+= Providing APIs
+
+A core capability of API management is for end users to create, manage, and configure APIs they wish to provide.
+
+This section explains the steps necessary for users to provide those APIs.
+
+== Creating an API
+
+First the user must create an API within an organization.
+If an organization does not yet exist one can easily be created.
+See the 'Managing Organizations' section for details.
+
+From the organization details page, navigate to the 'APIs' tab and click on the 'New API' button.
+
+You will be asked to provide an API name, version number, and description.
+
+If successfully created, you will be taken to the API details page.
+From here you can configure the details of the API.
+
+== API Implementation
+
+Every API must be configured with an API implementation.
+
+The implementation indicates the external API that the API Gateway will proxy to if all the policies are successfully applied.
+
+Click the 'Implementation' tab to configure the API endpoint and API type details on your API.
+
+The 'Implementation' tab is primarily used to configure the details of the back-end API that Apiman will proxy to at runtime.
+
+You must configure the following:
+
+* *Endpoint URL* - The URL that Apiman will use to proxy a request made for this API.
+* *Endpoint Type* - Currently either REST or SOAP (not presently used, future information)
+* *Endpoint Content Type* - Choose between JSON and XML, information primarily used to respond with a policy failure or error in the appropriate format.
+
+Additionally, the 'Implementation' tab allows you to configure any security options that might be required when proxying requests to the back-end API.
+
+For example, if you are using mutual TLS (mTLS) to ensure full security between the API Gateway and your back-end API, you may configure that here.
+
+We also support simple BASIC authentication between the gateway and your back end API.
+BASIC authentication is not preferred, and is especially insecure if not used with SSL/HTTPS.
+
+If the Apiman administrator has configured multiple Gateways (see the "System Administration / Gateways" section below), then the 'Implementation' tab will also include an option that will let you choose which Gateway(s) to use when publishing.
+
+You may select one or more Gateway in this case.
+
+If you choose multiple Gateways, then when you click the 'Publish' button, Apiman will publish the API to *all* the selected Gateways.
+
+TIP: If a single Gateway has been configured, then you don't have a choice, and so the UI
+will hide the Gateway selector entirely and simply pick the default Gateway for you.
+
+Do not forget to click the *Save* button when you are done making changes.
+
+== API Definition
+
+As a provider of an API, it is best to include as much information about the API as possible, so that consumers can not only create contracts, but also learn how to make API calls.
+
+For this purpose, you can optionally include an API Definition document by adding it to your API on the Definition tab.
+
+Currently supported are OpenAPI and Swagger (versions 2 and 3).
+
+Include an OpenAPI or Swagger document here so that consumers of your API can browse information about your API directly in the API Manager UI.
+
+== Available Plans
+
+Before an API can be consumed by a client app, it must make itself available through at least one of the organization's plans, or it must be marked as *Public*.
+
+Marking an API as public or making an API available through one or more plan can be done by navigating to the 'Plans' tab on the API details page.
+
+The 'Plans' tab will list all the available plans defined by the organization.
+Simply choose one or more plan from this list.
+
+If no plans are needed, you can instead mark the API as "Public", making it available to be consumed anonymously by any client.
+
+Although an API can be *both* Public and available through one or more plan, it is unusual to do so.
+
+TIP: After making any changes make sure to click the Save button.
+
+== Managing Policies
+
+API policies can be added and configured by navigating to the 'Policies' tab on the API details page.
+
+The 'Policies' tab presents a list of all the policies configured for this API.
+To add another policy to the API click the 'Add Policy' button.
+On the resulting page choose the type of policy you wish to create and then configure the details for that policy.
+Once you have configured the details click the 'Add Policy' button to add the policy to the API.
+
+== Publishing in the Gateway
+
+After all the configuration is complete for an API, it is time to publish the API to the runtime gateway.
+This can be done from any tab on the API details page by clicking  the *Publish* button in
+the top section of the UI.
+If successful, the status of the API will change to "Published" and the Publish button will disappear.
+
+[TIP]
+====
+If the API cannot yet be published (the 'Publish' button is disabled) then a notification will appear near the button and will read "*Why Can't I publish?*"
+
+Clicking this notification will provide details about what information is still required before the API can be published to the Gateway.
+====
+
+Once the API has been published, it may or may not be editable depending on whether it is a "Public" API or not.
+
+For "Public" APIs, you will be able to continue making changes.
+After at least one change is made, you will have the option to "Re-Publish" the API to the Gateway.
+Doing so will update all information about the API in the Gateway.
+
+However, if the API is *not* Public, then the API will be immutable - therefore in order to make any changes you will need to create a new version of the API.
+
+== API Metrics
+
+Once an API is published and is being consumed at runtime, metrics information about that usage is recorded in a metrics storage system.
+See the Metrics section of the API Gateway documentation for more about how and when metrics data is recorded.
+
+If an API has been used by at least once, then it will have metrics information available.
+
+This information can be viewed in the 'Metrics' tab on the API's details page.
+
+On this page you can choose the type of metric you wish to see (e.g. Usage metrics and Response Type metrics) as well as a pre-defined time range (e.g. Last 30 Days, Last Week, etc...).
+
+The API Metrics page is a great way to figure out how often your API is used, and in what
+ways.
+
+== Importing API(s)
+
+As an alternative to manually creating and configuring an API, Apiman also supports importing an API from a globally configured API Catalog.
+
+[TIP]
+====
+The API Catalog is configured by the Apiman system administrator/installer.
+
+See the installation guide for more information about how to configure a custom API Catalog.
+====
+
+An API can be imported into Apiman in one of two ways.
+
+* First, from the Organization's "APIs" tab you can click the down-arrow next to the "New API" button and choose the "Import API(s)" option.
+
+* This results in a wizard that will guide you through importing one or more API from the catalog into the Organization.
+
+* This wizard will allow you to search for, find, and select multiple APIs.
+
+* It will then walk you through choosing your Plans or making the APIs "Public".
+
+* Once all the wizard pages are completed, you can then import the API(s).
+
+TIP: The Import API(s) wizard above is the only way to import multiple APIs at the same time.
+
+Another option for importing an API from the catalog is to use the API Catalog Browser UI.
+
+* This can be found by clicking the "Browse available/importable APIs" link on the API Manager Dashboard.
+
+* This link will open the catalog browser, allowing you to search for APIs to
+import.
+
+* The catalog browser is a friendlier interface, but only allows you to import a
+single API at a time.

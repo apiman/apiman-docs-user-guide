@@ -10,14 +10,14 @@
 
 * Apiman Manager
 ** xref:manager/concepts.adoc[Concepts]
-*** xref:manager/concepts.adoc#_data_model[Data Model]
-*** xref:manager/concepts.adoc#_policy_chain[Policy Chain]
-*** xref:manager/concepts.adoc#_user_management[User Management]
-*** xref:manager/concepts.adoc#_managing_organizations[Managing Organizations]
-*** xref:manager/concepts.adoc#_managing_plans[Managing Plans]
-*** xref:manager/concepts.adoc#_providing_apis[Providing APIs]
-*** xref:manager/concepts.adoc#_consuming_apis[Consuming APIs]
-*** xref:manager/concepts.adoc#_versioning[Versioning]
+*** xref:manager/data-model.adoc[]
+*** xref:manager/data-model.adoc#_policy_chain[Policy Chain]
+*** xref:manager/user-management.adoc[]
+*** xref:manager/managing-organisations.adoc[]
+*** xref:manager/managing-plans.adoc[]
+*** xref:manager/providing-apis.adoc[]
+*** xref:manager/consuming-apis.adoc[]
+*** xref:manager/versioning.adoc[]
 
 ** xref:manager/administration.adoc[Administration]
 
