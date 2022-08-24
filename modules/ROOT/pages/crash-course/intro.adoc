@@ -22,8 +22,6 @@ The goal of this crash course is to provide a short and easy-to-consume introduc
 This crash course will explain how Apiman works and will walk you through a hands-on session to demonstrate how to use it.
 This course also provides links to the extensive online Apiman user documentation, demos and quickstarts, and other resources.
 
-This course is organized into the following sections:
-
 == How Apiman Works
 
 This section describes the data model Apiman uses, and how it uses the elements created in that data model to perform its tasks.
@@ -50,5 +48,3 @@ Each of the last two sections in the crash course provides step-by-step descript
  * Utilize Apiman's REST interface to automate tasks.
 
 Let's get started!
-
-:numbered!:
