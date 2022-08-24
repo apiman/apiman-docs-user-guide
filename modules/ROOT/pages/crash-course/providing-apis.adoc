@@ -4,21 +4,28 @@
 
 When an API is published to the API Gateway, the API is made available to the client apps that are the consumers of APIs. There are two different ways to publish an API:
 
-Publishing an API as Public API - Public APIs can be directly accessed by any client, without providing an API Key. This allows you to distribute the URL that is used to access the API through the API Gateway. The URL for a managed Public API takes this form:
+Publishing an API as Public API - Public APIs can be directly accessed by any client, without providing an API Key. This allows you to distribute the URL that is used to access the API through the API Gateway.
+The URL for a managed Public API takes this form:
 
 [source,log]
 ----
-http://gatewayhostname:port/apiman-gateway/\{organizationId}/\{API ID}/\{API version}/
+http://gatewayhostname:port/apiman-gateway/{organizationId}/{API ID}/{API version}/
 ----
 
-Public APIs are also very flexible in that they can be updated without being re-published. Unlike APIs published through Plans, Public APS can be accessed by a client app without requiring API consumers to agree to any terms and conditions related to a contract defined in a plan for the API.  It is also important to note that when an API is Public, only the policies configured on the API itself will be applied by the API Gateway.
+Public APIs are also very flexible in that they can be updated without being re-published.
+Unlike APIs published through Plans, Public APS can be accessed by a client app without requiring API consumers to agree to any terms and conditions related to a contract defined in a plan for the API.
+It is also important to note that when an API is Public, only the policies configured on the API itself will be applied by the API Gateway.
 
-Publishing an API through Plans - In contrast to Public APIs, these APIs, once published, must be accessed by a Client App via its API key.  In order to gain access to an API, the Client App must create a contract with an API through one of the API's configured Plans.  Also unlike Public APIs, APIs that are published and accessed through its Plans, once published, cannot be changed. To make changes, new versions of these APIs must be created.
+Publishing an API through Plans - In contrast to Public APIs, these APIs, once published, must be accessed by a Client App via its API key.
+In order to gain access to an API, the Client App must create a contract with an API through one of the API's configured Plans.
+Also unlike Public APIs, APIs that are published and accessed through its Plans, once published, cannot be changed. To make changes, new versions of these APIs must be created.
 
 == Security for APIs - Policy and Endpoint Security
-One important aspect of all APIs that are managed by the API Gateway is the security that the API Gateway provides.  Let's next take a look at the different types of security that are available.
+One important aspect of all APIs that are managed by the API Gateway is the security that the API Gateway provides.
+Let's next take a look at the different types of security that are available.
 
-The authentication policy type provides username/password security for clients as they access the managed API through the API Gateway, but it does not protect the API from unauthorized access attempts that bypass the Gateway completely. To make the API secure from unauthorized client applications, endpoint level security should also be configured.
+The authentication policy type provides username/password security for clients as they access the managed API through the API Gateway, but it does not protect the API from unauthorized access attempts that bypass the Gateway completely.
+To make the API secure from unauthorized client applications, endpoint level security should also be configured.
 
 The best way to start our discussion of the different, but complementary types of security that we'll examine in this article is with a diagram. The nodes involved are the client applications that will access our APIs, the Apiman API Gateway, and the servers that host our APIs:
 
@@ -27,7 +34,8 @@ image::apiman_006.png[]
 Let's work our way through the diagram from left to right and start by taking a look at Policy Level Security.
 
 === Policy Level Security
-Policy level security, such as that provided by an Authentication policy, secures the left side of the diagram, that is the communication channel between the applications and the API Gateway. In this communication channel, the applications play the role of the client, and the API Gateway plays the role of the server.
+Policy level security, such as that provided by an Authentication policy, secures the left side of the diagram, that is the communication channel between the applications and the API Gateway.
+In this communication channel, the applications play the role of the client, and the API Gateway plays the role of the server.
 
 We also want to secure the right side of the diagram, where the API Gateway plays the role of a client, and the APIs play the role of the servers.
 
