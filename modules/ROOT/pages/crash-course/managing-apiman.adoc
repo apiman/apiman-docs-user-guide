@@ -1,4 +1,4 @@
-= Section 5 - Managing Apiman
+= Managing Apiman
 
 == Users and Roles
 
